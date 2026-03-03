@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard — SLIBF</title>
+    <link rel="stylesheet" href="css/system.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="page-fade">
+
+    <div class="sys-layout">
+
+        <!-- ═══ SIDEBAR ═══════════════════════════════════ -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo-box"><i class="fas fa-university"></i></div>
+                <div class="sidebar-brand">
+                    <h2>SLIBF</h2>
+                    <span>Student Portal</span>
+                </div>
+            </div>
+
+            <div class="sidebar-user">
+                <div class="sidebar-avatar"><i class="fas fa-user-graduate"></i></div>
+                <div class="sidebar-user-info">
+                    <h4 id="sidebar-name">Loading…</h4>
+                    <span>Student</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <span class="nav-section-label">Main Menu</span>
+                <ul>
+                    <li><a href="#" class="active" data-panel="panel-dashboard">
+                            <i class="fas fa-th-large"></i> <span>Dashboard</span>
+                        </a></li>
+                    <li><a href="#" data-panel="panel-profile">
+                            <i class="fas fa-id-card"></i> <span>My Profile</span>
+                        </a></li>
+                    <li><a href="#" data-panel="panel-fee" id="nav-fee">
+                            <i class="fas fa-money-bill-wave"></i> <span>Course Fee</span>
+                        </a></li>
+                    <li><a href="#" data-panel="panel-attendance" id="nav-attendance">
+                            <i class="fas fa-calendar-check"></i> <span>Attendance</span>
+                        </a></li>
+                    <li><a href="#" data-panel="panel-news">
+                            <i class="fas fa-newspaper"></i> <span>News</span>
+                        </a></li>
+                </ul>
+
+                <div class="nav-divider"></div>
+                <span class="nav-section-label">Account</span>
+                <ul>
+                    <li><a href="login.html" style="color:rgba(255,255,255,0.6);">
+                            <i class="fas fa-question-circle"></i> <span>Help & Support</span>
+                        </a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <button class="btn-logout" onclick="Auth.logout()">
+                    <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- ═══ MAIN CONTENT ══════════════════════════════ -->
+        <div class="main-content">
+
+            <!-- Topbar -->
+            <div class="topbar">
+                <div class="topbar-left">
+                    <button class="hamburger-btn" id="hamburger-btn"><i class="fas fa-bars"></i></button>
+                    <div>
+                        <div class="topbar-title" id="topbar-title">Dashboard</div>
+                        <div class="topbar-subtitle" id="topbar-date"></div>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <span class="topbar-time" id="live-time"></span>
+                    <div class="topbar-btn" title="Notifications"><i class="fas fa-bell"></i></div>
+                    <div class="topbar-btn" onclick="Auth.logout()" title="Logout"><i class="fas fa-sign-out-alt"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-content">
+
+                <!-- Review Notice (shown if not Approved) -->
+                <div class="review-notice" id="review-notice" style="display:none;">
+                    <i class="fas fa-clock"></i>
+                    <span>Your registration is currently under review. Some sections are restricted until
+                        approval.</span>
+                </div>
+
+                <!-- ═══ PANEL: DASHBOARD ════════════════════ -->
+                <div class="panel active" id="panel-dashboard">
+                    <div class="page-header">
+                        <h2 id="welcome-heading">Welcome back!</h2>
+                        <p>Here's a summary of your academic status.</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card green">
+                            <div class="stat-icon green"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="stat-value" id="card-program-short">—</div>
+                            <div class="stat-label">Enrolled Program</div>
+                        </div>
+                        <div class="stat-card blue">
+                            <div class="stat-icon blue"><i class="fas fa-id-badge"></i></div>
+                            <div class="stat-value" id="card-status">—</div>
+                            <div class="stat-label">Registration Status</div>
+                        </div>
+                        <div class="stat-card gold" id="fee-card">
+                            <div class="stat-icon gold"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="stat-value" id="card-balance">—</div>
+                            <div class="stat-label">Outstanding Balance</div>
+                        </div>
+                        <div class="stat-card green" id="attendance-card">
+                            <div class="stat-icon green"><i class="fas fa-calendar-check"></i></div>
+                            <div class="stat-value" id="card-attendance">—%</div>
+                            <div class="stat-label">Attendance Rate</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick links -->
+                    <div
+                        style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1rem;">
+                        <div class="table-card" style="padding:1.5rem;cursor:pointer;"
+                            onclick="switchPanel('panel-fee')">
+                            <div style="display:flex;align-items:center;gap:1rem;">
+                                <div class="stat-icon gold" style="margin-bottom:0;"><i class="fas fa-receipt"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight:700;font-size:0.95rem;">View Fee Details</div>
+                                    <div style="font-size:0.78rem;color:var(--text-muted);">Total, Paid & Balance</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-card" style="padding:1.5rem;cursor:pointer;"
+                            onclick="switchPanel('panel-attendance')">
+                            <div style="display:flex;align-items:center;gap:1rem;">
+                                <div class="stat-icon green" style="margin-bottom:0;"><i
+                                        class="fas fa-clipboard-list"></i></div>
+                                <div>
+                                    <div style="font-weight:700;font-size:0.95rem;">View Attendance</div>
+                                    <div style="font-size:0.78rem;color:var(--text-muted);">Class-by-class record</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-card" style="padding:1.5rem;cursor:pointer;"
+                            onclick="switchPanel('panel-news')">
+                            <div style="display:flex;align-items:center;gap:1rem;">
+                                <div class="stat-icon blue" style="margin-bottom:0;"><i class="fas fa-newspaper"></i>
+                                </div>
+                                <div>
+                                    <div style="font-weight:700;font-size:0.95rem;">Latest News</div>
+                                    <div style="font-size:0.78rem;color:var(--text-muted);">Announcements & Events</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ PANEL: MY PROFILE ══════════════════ -->
+                <div class="panel" id="panel-profile">
+                    <div class="page-header">
+                        <h2>My Profile</h2>
+                        <p>Your personal and academic information.</p>
+                    </div>
+
+                    <div class="profile-header">
+                        <div class="profile-avatar"><i class="fas fa-user-graduate"></i></div>
+                        <div class="profile-info">
+                            <h2 id="prof-name">—</h2>
+                            <p id="prof-program">—</p>
+                            <div style="margin-top:0.8rem;" id="prof-status-badge"></div>
+                        </div>
+                    </div>
+
+                    <div class="profile-grid">
+                        <div class="profile-field">
+                            <label><i class="fas fa-id-card" style="margin-right:0.4rem;"></i> Student ID</label>
+                            <span id="prof-id">—</span>
+                        </div>
+                        <div class="profile-field">
+                            <label><i class="fas fa-envelope" style="margin-right:0.4rem;"></i> Email Address</label>
+                            <span id="prof-email">—</span>
+                        </div>
+                        <div class="profile-field">
+                            <label><i class="fas fa-graduation-cap" style="margin-right:0.4rem;"></i> Program</label>
+                            <span id="prof-prog2">—</span>
+                        </div>
+                        <div class="profile-field">
+                            <label><i class="fas fa-check-circle" style="margin-right:0.4rem;"></i> Registration
+                                Status</label>
+                            <span id="prof-status2">—</span>
+                        </div>
+                        <div class="profile-field">
+                            <label><i class="fas fa-calendar" style="margin-right:0.4rem;"></i> Academic Year</label>
+                            <span>2025 – 2026</span>
+                        </div>
+                        <div class="profile-field">
+                            <label><i class="fas fa-globe" style="margin-right:0.4rem;"></i> Institution</label>
+                            <span>SLIBF — Hargeisa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ PANEL: COURSE FEE ══════════════════ -->
+                <div class="panel" id="panel-fee">
+                    <div class="page-header">
+                        <h2>Course Fee</h2>
+                        <p>Your payment summary and detailed breakdown.</p>
+                    </div>
+
+                    <div class="fee-summary">
+                        <div class="fee-box total">
+                            <div class="fee-amount" id="fee-total">—</div>
+                            <div class="fee-label">Total Fee</div>
+                        </div>
+                        <div class="fee-box paid">
+                            <div class="fee-amount" id="fee-paid">—</div>
+                            <div class="fee-label">Amount Paid</div>
+                        </div>
+                        <div class="fee-box balance">
+                            <div class="fee-amount" id="fee-balance2">—</div>
+                            <div class="fee-label">Remaining Balance</div>
+                        </div>
+                    </div>
+
+                    <div class="table-card">
+                        <div class="table-head">
+                            <h3>Payment History</h3>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fee-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ═══ PANEL: ATTENDANCE ══════════════════ -->
+                <div class="panel" id="panel-attendance">
+                    <div class="page-header">
+                        <h2>Attendance Record</h2>
+                        <p>Your class attendance overview and detailed log.</p>
+                    </div>
+
+                    <div class="attendance-overview">
+                        <div class="circle-progress">
+                            <svg viewBox="0 0 130 130" width="130" height="130">
+                                <circle class="circle-bg" cx="65" cy="65" r="55"></circle>
+                                <circle class="circle-fill" cx="65" cy="65" r="55" id="att-circle"
+                                    stroke-dasharray="345.58" stroke-dashoffset="345.58"></circle>
+                            </svg>
+                            <div class="circle-text">
+                                <span class="pct" id="att-pct">0%</span>
+                                <span class="lbl">Attendance</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:0.5rem;" id="att-summary-title">
+                                Attendance Summary</h3>
+                            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1rem;">
+                                <div>
+                                    <div style="font-size:1.5rem;font-weight:800;color:var(--success);"
+                                        id="att-present">0</div>
+                                    <div
+                                        style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:600;">
+                                        Present</div>
+                                </div>
+                                <div>
+                                    <div style="font-size:1.5rem;font-weight:800;color:var(--danger);" id="att-absent">0
+                                    </div>
+                                    <div
+                                        style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:600;">
+                                        Absent</div>
+                                </div>
+                                <div>
+                                    <div style="font-size:1.5rem;font-weight:800;color:var(--warning);" id="att-late">0
+                                    </div>
+                                    <div
+                                        style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:600;">
+                                        Late</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-card">
+                        <div class="table-head">
+                            <h3>Attendance Log</h3>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Subject</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="att-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ═══ PANEL: NEWS ════════════════════════ -->
+                <div class="panel" id="panel-news">
+                    <div class="page-header">
+                        <h2>News & Announcements</h2>
+                        <p>Stay informed with the latest updates from SLIBF.</p>
+                    </div>
+                    <div id="news-container"
+                        style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.4rem;">
+                    </div>
+                </div>
+
+            </div><!-- /page-content -->
+        </div><!-- /main-content -->
+    </div><!-- /sys-layout -->
+
+    <div id="sys-toast" class="toast"></div>
+
+    <script src="js/system.js"></script>
+    <script>
+        (function () {
+            // ── Auth Guard ──────────────────────────
+            const session = Auth.requireRole('student');
+            if (!session) return;
+
+            // ── Populate sidebar user ───────────────
+            document.getElementById('sidebar-name').textContent = session.name.split(' ').slice(0, 2).join(' ');
+
+            // ── Date / Time ─────────────────────────
+            const now = new Date();
+            document.getElementById('topbar-date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+            initLiveTime();
+
+            // ── Conditional: Approved vs Pending ────
+            const isApproved = session.status === 'Approved';
+            if (!isApproved) {
+                document.getElementById('review-notice').style.display = 'flex';
+                document.getElementById('fee-card').querySelector('.stat-value').parentElement.classList.add('blur-overlay');
+                document.getElementById('attendance-card').classList.add('blur-overlay');
+                document.getElementById('nav-fee').style.pointerEvents = 'none';
+                document.getElementById('nav-fee').style.opacity = '0.4';
+                document.getElementById('nav-attendance').style.pointerEvents = 'none';
+                document.getElementById('nav-attendance').style.opacity = '0.4';
+            }
+
+            // ── Dashboard Cards ──────────────────────
+            document.getElementById('welcome-heading').textContent = `Welcome back, ${session.name.split(' ')[0]}!`;
+            document.getElementById('card-program-short').textContent = session.program ? session.program.split(' ').slice(0, 3).join(' ') + '…' : '—';
+            document.getElementById('card-status').innerHTML = statusBadge(session.status);
+
+            const balance = session.fee - session.paid;
+            document.getElementById('card-balance').textContent = '$' + balance.toLocaleString();
+            document.getElementById('card-attendance').textContent = '87.5%';
+
+            // ── Profile ──────────────────────────────
+            document.getElementById('prof-name').textContent = session.name;
+            document.getElementById('prof-program').textContent = session.program || '—';
+            document.getElementById('prof-id').textContent = session.id;
+            document.getElementById('prof-email').textContent = session.email;
+            document.getElementById('prof-prog2').textContent = session.program || '—';
+            document.getElementById('prof-status-badge').innerHTML = statusBadge(session.status);
+            document.getElementById('prof-status2').innerHTML = statusBadge(session.status);
+
+            // ── Fee ──────────────────────────────────
+            document.getElementById('fee-total').textContent = formatCurrency(session.fee);
+            document.getElementById('fee-paid').textContent = formatCurrency(session.paid);
+            document.getElementById('fee-balance2').textContent = formatCurrency(balance);
+
+            const feeTbody = document.getElementById('fee-tbody');
+            const feeRows = [
+                { desc: 'Semester 1 Tuition', amt: Math.round(session.fee * 0.5), date: '2025-09-01', status: 'Paid' },
+                { desc: 'Semester 2 Tuition', amt: Math.round(session.fee * 0.3), date: '2026-01-15', status: session.paid >= session.fee * 0.8 ? 'Paid' : 'Pending' },
+                { desc: 'Registration Fee', amt: Math.round(session.fee * 0.1), date: '2025-08-20', status: 'Paid' },
+                { desc: 'Library & Lab Fees', amt: Math.round(session.fee * 0.1), date: '2025-09-01', status: balance > 0 ? 'Unpaid' : 'Paid' },
+            ];
+            feeTbody.innerHTML = feeRows.map((r, i) => `
+        <tr>
+            <td>${i + 1}</td>
+            <td>${r.desc}</td>
+            <td>${formatCurrency(r.amt)}</td>
+            <td>${r.date}</td>
+            <td>${statusBadge(r.status)}</td>
+        </tr>
+    `).join('');
+
+            // ── Attendance ───────────────────────────
+            const att = DB.attendance;
+            const total = att.length;
+            const presentCount = att.filter(a => a.status === 'Present').length;
+            const absentCount = att.filter(a => a.status === 'Absent').length;
+            const lateCount = att.filter(a => a.status === 'Late').length;
+            const pct = Math.round((presentCount / total) * 100);
+
+            document.getElementById('att-pct').textContent = pct + '%';
+            document.getElementById('att-present').textContent = presentCount;
+            document.getElementById('att-absent').textContent = absentCount;
+            document.getElementById('att-late').textContent = lateCount;
+
+            // Animate circle
+            const circumference = 2 * Math.PI * 55;
+            const offset = circumference - (pct / 100) * circumference;
+            setTimeout(() => {
+                document.getElementById('att-circle').style.strokeDashoffset = offset;
+            }, 300);
+
+            // Attendance table
+            const attTbody = document.getElementById('att-tbody');
+            attTbody.innerHTML = att.map(a => `
+        <tr>
+            <td>${a.date}</td>
+            <td>${a.subject}</td>
+            <td>${statusBadge(a.status)}</td>
+        </tr>
+    `).join('');
+
+            // ── News ─────────────────────────────────
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = DB.news.map(n => `
+        <div class="table-card" style="overflow:hidden;">
+            <div style="height:120px;background:linear-gradient(135deg,var(--primary-dark),var(--primary));display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-newspaper" style="font-size:2.5rem;color:rgba(255,255,255,0.3);"></i>
+            </div>
+            <div style="padding:1.4rem;">
+                <div style="font-size:0.75rem;color:var(--text-muted);font-weight:600;margin-bottom:0.5rem;"><i class="fas fa-calendar" style="margin-right:0.3rem;"></i>${n.date}</div>
+                <h3 style="font-size:1rem;font-weight:700;margin-bottom:0.6rem;">${n.title}</h3>
+                <p style="font-size:0.85rem;color:var(--text-muted);">${n.content}</p>
+            </div>
+        </div>
+    `).join('');
+
+            initSidebar();
+            initLiveTime();
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admissions | SLIBF</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 20px rgba(11, 110, 79, 0.2);
+        }
+
+        .admission-form-wrapper {
+            max-width: 800px;
+            margin: 4rem auto;
+            background: white;
+            padding: 4rem;
+            border-radius: 30px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eee;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: span 1;
+            }
+
+            .admission-form-wrapper {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Utility Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone-alt"></i> +252 63 XXXXXXX</span>
+                <span><i class="fas fa-envelope"></i> admissions@slibf.edu</span>
+            </div>
+            <div class="top-bar-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">SLIBF</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="news.html">News</a></li>
+                <li class="active"><a href="admissions.html">Admissions</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#apply" class="btn-apply">Apply Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <header class="page-hero">
+        <div class="container">
+            <h1>Join the Class of 2026</h1>
+            <p style="margin-top: 1rem; opacity: 0.8;">Your journey towards financial leadership starts here.</p>
+        </div>
+    </header>
+
+    <!-- Section: Requirements -->
+    <section id="requirements">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+                <div class="reveal">
+                    <div class="section-title" style="text-align: left;">
+                        <h2>Admission Requirements</h2>
+                        <span></span>
+                    </div>
+                    <ul style="list-style: none; margin-top: 2rem;">
+                        <li style="margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                            <i class="fas fa-check-circle" style="color: var(--primary-color); font-size: 1.1rem;"></i>
+                            <span>Completed Application Form</span>
+                        </li>
+                        <li style="margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                            <i class="fas fa-check-circle" style="color: var(--primary-color); font-size: 1.1rem;"></i>
+                            <span>Certified copies of academic certificates &amp; transcripts</span>
+                        </li>
+                        <li style="margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                            <i class="fas fa-check-circle" style="color: var(--primary-color); font-size: 1.1rem;"></i>
+                            <span>Valid identification (National ID or Passport)</span>
+                        </li>
+                        <li style="margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                            <i class="fas fa-check-circle" style="color: var(--primary-color); font-size: 1.1rem;"></i>
+                            <span>Passport-sized photographs (2)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="reveal">
+                    <div class="card"
+                        style="background: var(--accent-color); padding: 3rem; border-left: 5px solid var(--primary-color);">
+                        <h3>Eligibility Note</h3>
+                        <p style="margin-top: 1rem; color: var(--text-muted);">Certain postgraduate programs may require
+                            a minimum of 2 years of professional work experience in the financial sector.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Application Process -->
+    <section id="process" style="background-color: #f8fcf9;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Application Process</h2>
+                <span></span>
+            </div>
+            <div class="process-grid">
+                <div class="process-step reveal">
+                    <div class="step-number"><i class="fas fa-search"></i></div>
+                    <h4>Choose Program</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">Select your field of
+                        interest.</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="step-number"><i class="fas fa-file-alt"></i></div>
+                    <h4>Submit Form</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">Fill the online or paper
+                        form.</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="step-number"><i class="fas fa-upload"></i></div>
+                    <h4>Submit Docs</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">Upload required
+                        certifications.</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="step-number"><i class="fas fa-user-check"></i></div>
+                    <h4>Evaluation</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">Our board reviews your
+                        data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Apply Now Form -->
+    <section id="apply">
+        <div class="container">
+            <div class="admission-form-wrapper reveal">
+                <div class="section-title">
+                    <h2>Apply Now</h2>
+                    <span></span>
+                    <p style="margin-top: 1.5rem; color: var(--text-muted);">Start your application today. All fields
+                        marked * are required.</p>
+                </div>
+
+                <form id="admissionForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" class="form-control" name="name" required placeholder="Ahmed Mohamed">
+                            <span class="error-msg"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" class="form-control" name="email" required
+                                placeholder="ahmed@example.com">
+                            <span class="error-msg"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" class="form-control" name="phone" required placeholder="+252 63 XXX XXX">
+                            <span class="error-msg"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Program Selection *</label>
+                            <select class="form-control" name="program" required>
+                                <option value="">Select a Program</option>
+                                <option value="PG001">Master in Islamic Banking</option>
+                                <option value="PG002">BSc in Banking & Finance</option>
+                                <option value="PG010">Advanced Diploma in FinTech</option>
+                            </select>
+                            <span class="error-msg"></span>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Personal Statement / Message</label>
+                            <textarea class="form-control" name="message" rows="6"
+                                placeholder="Tell us about your background and motivation..."></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.2rem;"><i
+                            class="fas fa-paper-plane" style="margin-right:0.5rem;"></i> Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                &copy; 2026 Somaliland Institute of Banking and Finance. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

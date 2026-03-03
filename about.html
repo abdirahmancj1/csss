@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | SLIBF - Somaliland Institute of Banking and Finance</title>
+    <meta name="description"
+        content="Learn about the Somaliland Institute of Banking and Finance — a semi-governmental institution affiliated with the Central Bank of Somaliland.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+        }
+
+        .about-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .vm-card {
+            background: #fff;
+            padding: 3.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            transition: var(--transition);
+        }
+
+        .vm-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(11, 110, 79, 0.1);
+        }
+
+        .vm-card h3 {
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .vm-card p {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .value-card {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(11, 110, 79, 0.08);
+        }
+
+        .value-card h4 {
+            color: var(--text-main);
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        .value-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .obj-list {
+            list-style: none;
+        }
+
+        .obj-list li {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .obj-number {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .obj-text h4 {
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+
+        .obj-text p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 968px) {
+            .about-two-col {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Utility Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone-alt"></i> +252 63 XXXXXXX</span>
+                <span><i class="fas fa-envelope"></i> info@slibf.edu</span>
+                <span><i class="fas fa-clock"></i> Sat - Thu: 8:00 AM - 4:00 PM</span>
+            </div>
+            <div class="top-bar-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">SLIBF</a>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown active">
+                    <a href="about.html">About ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#background">Background</a></li>
+                        <li><a href="#vision">Vision & Mission</a></li>
+                        <li><a href="#values">Core Values</a></li>
+                        <li><a href="#objectives">Objectives</a></li>
+                        <li><a href="#leadership">Leadership</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="programs.html">Programs ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="programs.html#featured">Academic Programs</a></li>
+                        <li><a href="#">Professional Certifications</a></li>
+                        <li><a href="#">Corporate Training</a></li>
+                    </ul>
+                </li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="admissions.html">Admissions</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="system/login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="admissions.html" class="btn-apply">Apply Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <header class="page-hero">
+        <div class="container">
+            <h1>About Our Institution</h1>
+            <p style="margin-top: 1rem; opacity: 0.8; max-width: 650px; margin-left: auto; margin-right: auto;">A
+                semi-governmental educational institution affiliated with the Central Bank of Somaliland.</p>
+            <div class="breadcrumb"><a href="index.html">Home</a> / About Us</div>
+        </div>
+    </header>
+
+    <!-- ===== Section 1: Background ===== -->
+    <section id="background">
+        <div class="container">
+            <div class="about-two-col">
+                <div class="reveal">
+                    <div class="section-title" style="text-align: left; margin-bottom: 2rem;">
+                        <h2>Institutional Background</h2>
+                        <span></span>
+                    </div>
+                    <p class="about-text">
+                        The Somaliland Institute of Banking and Finance (SLIBF) is a semi-governmental educational
+                        institution affiliated with the Central Bank of Somaliland and accredited by the National
+                        Commission for Higher Education of the Republic of Somaliland.
+                    </p>
+                    <br>
+                    <p class="about-text">
+                        The SLIBF is specialized in providing internationally accredited higher education and customized
+                        training programs in the field of banking and finance while providing a specialized scientific
+                        environment in this field using a method that takes into account the international standards in
+                        education and training according to comprehensive quality standards, ensuring to produce highly
+                        competent qualified individuals.
+                    </p>
+                    <br>
+                    <p class="about-text">
+                        The main objective of the Institute is to respond to the educational and training needs in
+                        teaching, training and learning of the society of the Republic of Somaliland and the communities
+                        of the Horn of Africa. It also aims to develop the talents of workers in the banking and
+                        financial sector by providing high-quality educational and training programs that contribute to
+                        raising their scientific and professional levels.
+                    </p>
+                </div>
+                <div class="reveal">
+                    <img src="images/faculty.jpg" alt="SLIBF Faculty and Students" class="about-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Section 2 & 3: Vision & Mission ===== -->
+    <section id="vision" style="background-color: #f8fcf9;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Vision & Mission</h2>
+                <span></span>
+            </div>
+            <div class="card-grid">
+                <div class="vm-card reveal">
+                    <div style="font-size: 3rem; margin-bottom: 1.5rem; color: var(--primary-color);"><i
+                            class="fas fa-bullseye"></i></div>
+                    <h3>Our Vision</h3>
+                    <p>The SLIBF is an educational and training institution that intends to achieve excellence and
+                        leadership in education, training and applied practices in the field of banking and finance at
+                        the postgraduate level; to prepare specialized and qualified cadres in Islamic finance industry
+                        that contribute to the development of the financial sector for the societies of the Horn of
+                        Africa in general, and Somaliland in particular.</p>
+                </div>
+                <div class="vm-card reveal">
+                    <div style="font-size: 3rem; margin-bottom: 1.5rem; color: var(--primary-color);"><i
+                            class="fas fa-rocket"></i></div>
+                    <h3>Our Mission</h3>
+                    <p>The SLIBF is to provide a specialized scientific environment in the field of banking and finance
+                        and to follow an approach that takes into account the originality of education and training
+                        according to quality standards to produce qualified cadres with high scientific competencies and
+                        good professional ethics that contribute to the economic and social progress of the societies of
+                        the Horn of Africa in general, and Somaliland society in particular.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Section 4: Core Values ===== -->
+    <section id="values">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Core Values</h2>
+                <span></span>
+                <p
+                    style="margin-top: 1.5rem; color: var(--text-muted); max-width: 700px; margin-left: auto; margin-right: auto;">
+                    The members of the Institute — including students, professors, and employees — are committed to a
+                    set of values consistent with the Islamic religion.</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card reveal">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary-color);"><i
+                            class="fas fa-trophy"></i></div>
+                    <h4>Academic Quality & Professional Leadership</h4>
+                    <p>Upholding the highest standards in teaching, research, and professional development across all
+                        programs.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary-color);"><i
+                            class="fas fa-balance-scale"></i></div>
+                    <h4>Transparency & Good Governance</h4>
+                    <p>Operating with integrity, openness, and accountability in all institutional affairs and
+                        decision-making processes.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary-color);"><i
+                            class="fas fa-handshake"></i></div>
+                    <h4>Responsibility & Initiative in Teamwork</h4>
+                    <p>Fostering a collaborative environment where every member takes ownership of their role and
+                        contributes proactively.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary-color);"><i
+                            class="fas fa-scroll"></i></div>
+                    <h4>Scientific Honesty & Professional Ethics</h4>
+                    <p>Maintaining the highest ethical standards in academic research, financial practice, and
+                        professional conduct.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary-color);"><i
+                            class="fas fa-bolt"></i></div>
+                    <h4>Effectiveness & Efficiency</h4>
+                    <p>Ensuring excellence and measurable outcomes in teaching, training, and learning methodologies.
+                    </p>
+                </div>
+                <div class="value-card reveal">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary-color);"><i
+                            class="fas fa-landmark"></i></div>
+                    <h4>Respect for Law & National Systems</h4>
+                    <p>Upholding the regulatory frameworks, laws, and governance systems of the Republic of Somaliland.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Section 5: Objectives ===== -->
+    <section id="objectives" style="background: linear-gradient(135deg, #041c14 0%, #0B6E4F 100%); color: #fff;">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: #fff;">Institutional Objectives</h2>
+                <span style="background: rgba(255,255,255,0.3);"></span>
+                <p style="margin-top: 1.5rem; opacity: 0.8; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Our strategic objectives guide every academic and professional initiative at SLIBF.</p>
+            </div>
+
+            <ul class="obj-list">
+                <li class="reveal">
+                    <div class="obj-number">1</div>
+                    <div class="obj-text">
+                        <h4 style="color: #fff;">Knowledge & Professional Skills</h4>
+                        <p style="color: rgba(255,255,255,0.75);">Providing learners with knowledge and professional
+                            skills in the banking and financial sector.</p>
+                    </div>
+                </li>
+                <li class="reveal">
+                    <div class="obj-number">2</div>
+                    <div class="obj-text">
+                        <h4 style="color: #fff;">Research Capabilities</h4>
+                        <p style="color: rgba(255,255,255,0.75);">Building the capacity of the learners' practical and
+                            research capabilities in a unique and distinguished manner.</p>
+                    </div>
+                </li>
+                <li class="reveal">
+                    <div class="obj-number">3</div>
+                    <div class="obj-text">
+                        <h4 style="color: #fff;">Leadership Development</h4>
+                        <p style="color: rgba(255,255,255,0.75);">Preparing leaders of the banking and financial sector
+                            to reach their educational and training potential with integrity and high competency
+                            nationally, regionally and internationally.</p>
+                    </div>
+                </li>
+                <li class="reveal">
+                    <div class="obj-number">4</div>
+                    <div class="obj-text">
+                        <h4 style="color: #fff;">Community Awareness</h4>
+                        <p style="color: rgba(255,255,255,0.75);">Spreading practical and theoretical aspects in banking
+                            and financial awareness within the local community.</p>
+                    </div>
+                </li>
+                <li class="reveal">
+                    <div class="obj-number">5</div>
+                    <div class="obj-text">
+                        <h4 style="color: #fff;">Islamic Ethics in Finance</h4>
+                        <p style="color: rgba(255,255,255,0.75);">Paying attention to banking and financial studies and
+                            scientific research by routing and linking to Islamic ethics and principles.</p>
+                    </div>
+                </li>
+                <li class="reveal">
+                    <div class="obj-number">6</div>
+                    <div class="obj-text">
+                        <h4 style="color: #fff;">Global Partnerships</h4>
+                        <p style="color: rgba(255,255,255,0.75);">Building joint working agreements with reputable
+                            local, regional and international partners to achieve academic and professional excellence.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===== Section 6: Accreditation ===== -->
+    <section style="background: #fff;">
+        <div class="container">
+            <div class="about-two-col">
+                <div class="reveal">
+                    <img src="images/graduates.jpg" alt="SLIBF Graduation Ceremony" class="about-img">
+                </div>
+                <div class="reveal">
+                    <div class="section-title" style="text-align: left; margin-bottom: 2rem;">
+                        <h2>Accreditation & Affiliation</h2>
+                        <span></span>
+                    </div>
+                    <p class="about-text">
+                        SLIBF operates under the oversight of the <strong>Central Bank of Somaliland</strong> and is
+                        accredited by the <strong>National Commission for Higher Education</strong> of the Republic of
+                        Somaliland.
+                    </p>
+                    <br>
+                    <p class="about-text">
+                        Our programs follow international standards set by leading global bodies, ensuring our graduates
+                        are recognized and respected worldwide.
+                    </p>
+                    <br>
+                    <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1rem;">
+                        <div
+                            style="background: #f8fcf9; padding: 1.2rem 2rem; border-radius: 10px; font-weight: 800; color: var(--primary-color);">
+                            AAOIFI</div>
+                        <div
+                            style="background: #f8fcf9; padding: 1.2rem 2rem; border-radius: 10px; font-weight: 800; color: var(--primary-color);">
+                            CIBAFI</div>
+                        <div
+                            style="background: #f8fcf9; padding: 1.2rem 2rem; border-radius: 10px; font-weight: 800; color: var(--primary-color);">
+                            BIBF</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Section 7: Leadership ===== -->
+    <section id="leadership" style="background: #f8fcf9;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Institutional Leadership</h2>
+                <span></span>
+            </div>
+            <div class="news-grid">
+                <div class="card reveal" style="text-align: center; padding: 3rem;">
+                    <img src="images/campus.jpg" alt="Executive Director"
+                        style="width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin: 0 auto 2rem; display: block; border: 5px solid var(--accent-color);">
+                    <h3>Executive Director</h3>
+                    <p style="color: var(--primary-color); font-weight: 700; font-size: 1.1rem;">Prof. Ahmed Mohamed</p>
+                    <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.92rem;">Leading the institute
+                        with decades of experience in international banking and Islamic finance education.</p>
+                </div>
+                <div class="card reveal" style="text-align: center; padding: 3rem;">
+                    <img src="images/event.jpg" alt="Academic Dean"
+                        style="width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin: 0 auto 2rem; display: block; border: 5px solid var(--accent-color);">
+                    <h3>Academic Dean</h3>
+                    <p style="color: var(--primary-color); font-weight: 700; font-size: 1.1rem;">Dr. Fatima Hassan</p>
+                    <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.92rem;">Overseeing curriculum
+                        development and academic quality assurance across all programs.</p>
+                </div>
+                <div class="card reveal" style="text-align: center; padding: 3rem;">
+                    <img src="images/about_img.jpg" alt="Head of Training"
+                        style="width: 160px; height: 160px; border-radius: 50%; object-fit: cover; margin: 0 auto 2rem; display: block; border: 5px solid var(--accent-color);">
+                    <h3>Head of Training</h3>
+                    <p style="color: var(--primary-color); font-weight: 700; font-size: 1.1rem;">Mr. Abdirahman Jama</p>
+                    <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.92rem;">Managing corporate
+                        training partnerships and professional development programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background: var(--primary-color); padding: 5rem 0; text-align: center; color: #fff;">
+        <div class="container">
+            <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Ready to Be Part of SLIBF?</h2>
+            <p style="opacity: 0.8; max-width: 550px; margin: 0 auto 2rem;">Discover our world-class programs and take
+                the first step toward a career in banking and finance.</p>
+            <a href="admissions.html" class="btn-elite-primary">Explore Admissions</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>SLIBF</h3>
+                    <p>A semi-governmental educational institution affiliated with the Central Bank of Somaliland,
+                        specialized in banking and finance education.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="programs.html#featured">Academic Programs</a></li>
+                        <li><a href="#">Certifications</a></li>
+                        <li><a href="#">Corporate Training</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="news.html">News & Events</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Hargeisa, Somaliland</p>
+                    <p><i class="fas fa-envelope"></i> info@slibf.edu</p>
+                    <p><i class="fas fa-phone-alt"></i> +252 63 XXXXXXX</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Somaliland Institute of Banking and Finance. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

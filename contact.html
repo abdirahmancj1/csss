@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | SLIBF</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+        }
+
+        .contact-panel {
+            background: var(--primary-color);
+            color: white;
+            padding: 4rem;
+            border-radius: 20px;
+        }
+
+        .contact-panel h3 {
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+
+        .info-box {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            align-items: flex-start;
+        }
+
+        .info-box .icon {
+            background: rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 1.2rem;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 350px;
+            background: #f8fcf9;
+            border-radius: 20px;
+            margin-top: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            border: 2px dashed #c8e6c9;
+        }
+
+        @media (max-width: 968px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-panel {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Utility Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-map-marker-alt"></i> Hargeisa, Somaliland</span>
+                <span><i class="fas fa-clock"></i> Sat - Thu: 08:00 - 16:00</span>
+            </div>
+            <div class="top-bar-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">SLIBF</a>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="about.html">About ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html#background">Background</a></li>
+                        <li><a href="about.html#vision">Vision & Mission</a></li>
+                        <li><a href="about.html#values">Core Values</a></li>
+                        <li><a href="about.html#leadership">Leadership</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="programs.html">Programs ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="programs.html#featured">Academic Programs</a></li>
+                        <li><a href="#">Professional Certifications</a></li>
+                        <li><a href="#">Corporate Training</a></li>
+                    </ul>
+                </li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="admissions.html">Admissions</a></li>
+                <li class="active"><a href="contact.html">Contact</a></li>
+                <li><a href="system/login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="admissions.html" class="btn-apply">Apply Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <header class="page-hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p style="margin-top: 1rem; opacity: 0.8;">We're here to assist you with any inquiries.</p>
+            <div class="breadcrumb"><a href="index.html">Home</a> / Contact</div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Info Panel -->
+                <div class="contact-panel reveal">
+                    <h3>Office Information</h3>
+                    <div class="info-box">
+                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h4>Our Location</h4>
+                            <p style="opacity: 0.8; margin-top: 0.5rem;">Main Educational Complex, Wardhigley Road,
+                                Hargeisa, Somaliland</p>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p style="opacity: 0.8; margin-top: 0.5rem;">+252 63 XXXXXXX</p>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <div class="icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>Email</h4>
+                            <p style="opacity: 0.8; margin-top: 0.5rem;">info@slibf.edu</p>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <div class="icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <h4>Office Hours</h4>
+                            <p style="opacity: 0.8; margin-top: 0.5rem;">Saturday – Thursday: 8:00 AM – 4:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Panel -->
+                <div class="reveal">
+                    <h3>Send us a Message</h3>
+                    <p style="color: var(--text-muted); margin: 1rem 0 2rem;">Please fill out the form below and we will
+                        get back to you within one business day.</p>
+                    <form id="contactForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div class="form-group">
+                                <label>Your Name *</label>
+                                <input type="text" class="form-control" required placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address *</label>
+                                <input type="email" class="form-control" required placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 1.5rem;">
+                            <label>Subject</label>
+                            <input type="text" class="form-control" placeholder="General Inquiry">
+                        </div>
+                        <div class="form-group" style="margin-top: 1.5rem;">
+                            <label>Your Message *</label>
+                            <textarea class="form-control" rows="8" required
+                                placeholder="How can we help you?"></textarea>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-paper-plane"
+                                style="margin-right: 0.5rem;"></i> Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Map Placeholder -->
+            <div class="map-placeholder reveal">
+                <div style="text-align: center;">
+                    <i class="fas fa-map-marked-alt"
+                        style="font-size: 3rem; color: var(--primary-color); opacity: 0.4;"></i>
+                    <p style="margin-top: 1rem; color: var(--text-muted);">SLIBF Location — Google Maps Integration
+                        Placeholder</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>SLIBF</h3>
+                    <p style="opacity:0.6; margin-top:1rem;">Empowering the next generation of financial experts in
+                        Somaliland through academic excellence and professional integrity.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="news.html">News & Events</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Hargeisa, Somaliland</p>
+                    <p><i class="fas fa-envelope"></i> info@slibf.edu</p>
+                    <p><i class="fas fa-phone-alt"></i> +252 63 XXXXXXX</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Follow Us</h4>
+                    <div style="display:flex; gap:1rem; margin-top:0.5rem;">
+                        <a href="#" style="color:rgba(255,255,255,0.5); font-size:1.2rem;"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color:rgba(255,255,255,0.5); font-size:1.2rem;"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#" style="color:rgba(255,255,255,0.5); font-size:1.2rem;"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="#" style="color:rgba(255,255,255,0.5); font-size:1.2rem;"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Somaliland Institute of Banking and Finance. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

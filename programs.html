@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Programs | SLIBF</title>
+    <meta name="description"
+        content="Explore 26+ professional programs in Banking, Islamic Finance, FinTech and more at SLIBF.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .search-wrapper {
+            max-width: 600px;
+            margin: -30px auto 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            padding: 1.5rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+            font-size: 1.05rem;
+            outline: none;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .search-wrapper input:focus {
+            box-shadow: 0 15px 50px rgba(11, 110, 79, 0.2);
+        }
+
+        .program-table-card {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            border: 1px solid #eee;
+        }
+
+        .program-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .program-table th {
+            background: var(--primary-color);
+            color: white;
+            text-align: left;
+            padding: 1.3rem 1.5rem;
+            text-transform: uppercase;
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+        }
+
+        .program-table td {
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid #f5f5f5;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        .program-table tr:hover td {
+            background: #f8fcf9;
+            color: var(--primary-color);
+        }
+
+        .id-badge {
+            background: #edf7f3;
+            color: var(--primary-color);
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .program-table-card {
+                overflow-x: auto;
+            }
+
+            .program-table {
+                min-width: 600px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Utility Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-container">
+            <div class="top-bar-info">
+                <span><i class="fas fa-phone-alt"></i> +252 63 XXXXXXX</span>
+                <span><i class="fas fa-envelope"></i> info@slibf.edu</span>
+                <span><i class="fas fa-clock"></i> Sat - Thu: 8:00 AM - 4:00 PM</span>
+            </div>
+            <div class="top-bar-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">SLIBF</a>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="about.html">About ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="about.html#background">Background</a></li>
+                        <li><a href="about.html#vision">Vision & Mission</a></li>
+                        <li><a href="about.html#values">Core Values</a></li>
+                        <li><a href="about.html#leadership">Leadership</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown active">
+                    <a href="programs.html">Programs ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#featured">Featured Programs</a></li>
+                        <li><a href="#all-programs">All 26 Programs</a></li>
+                    </ul>
+                </li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="admissions.html">Admissions</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="system/login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="admissions.html" class="btn-apply">Apply Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <header class="page-hero">
+        <div class="container">
+            <h1>Our Academic Programs</h1>
+            <p style="margin-top: 1rem; opacity: 0.8; max-width: 600px; margin-left: auto; margin-right: auto;">Explore
+                26 specialized programs in Banking, Islamic Finance, FinTech, and Professional Certifications.</p>
+            <div class="breadcrumb"><a href="index.html">Home</a> / Academic Programs</div>
+        </div>
+    </header>
+
+    <!-- Featured Programs Section - Detailed with Images -->
+    <section id="featured">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Programs</h2>
+                <span></span>
+                <p
+                    style="margin-top: 1.5rem; color: var(--text-muted); max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Our flagship programs are designed for professionals and graduates seeking world-class education in
+                    finance and banking.</p>
+            </div>
+
+            <div class="program-feature-grid">
+
+                <!-- Card 1 -->
+                <div class="program-detail-card reveal">
+                    <div class="program-card-img-wrapper">
+                        <img src="images/graduates.jpg" alt="Islamic Banking Program">
+                        <span class="program-tag">Postgraduate</span>
+                    </div>
+                    <div class="program-detail-content">
+                        <h3>Master in Islamic Banking & Finance</h3>
+                        <p>A comprehensive 18-month postgraduate program covering Shari'ah-compliant banking products,
+                            sukuk structures, takaful, and modern Islamic capital markets. Graduates are equipped to
+                            lead in dual banking systems.</p>
+                        <ul class="program-features">
+                            <li>18-month intensive curriculum</li>
+                            <li>AAOIFI-aligned syllabus</li>
+                            <li>Research thesis required</li>
+                            <li>Internship placement support</li>
+                        </ul>
+                        <a href="admissions.html" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="program-detail-card reveal">
+                    <div class="program-card-img-wrapper">
+                        <img src="images/faculty.jpg" alt="Banking & Finance BSc">
+                        <span class="program-tag">Undergraduate</span>
+                    </div>
+                    <div class="program-detail-content">
+                        <h3>BSc in Banking and Finance</h3>
+                        <p>A four-year undergraduate degree that builds a strong foundation in financial theory, banking
+                            operations, credit analysis, and regulatory frameworks. Ideal for students starting their
+                            career in the financial sector.</p>
+                        <ul class="program-features">
+                            <li>4-year full-time program</li>
+                            <li>Covers conventional & Islamic finance</li>
+                            <li>Capstone project in final year</li>
+                            <li>Industry guest lectures</li>
+                        </ul>
+                        <a href="admissions.html" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="program-detail-card reveal">
+                    <div class="program-card-img-wrapper">
+                        <img src="images/campus.jpg" alt="FinTech Program">
+                        <span class="program-tag">Advanced Diploma</span>
+                    </div>
+                    <div class="program-detail-content">
+                        <h3>Advanced Diploma in FinTech</h3>
+                        <p>An industry-focused program exploring digital banking, mobile money ecosystems, blockchain
+                            applications, and AI-driven financial services — engineered for the future of banking in
+                            Africa.</p>
+                        <ul class="program-features">
+                            <li>12-month accelerated format</li>
+                            <li>Digital banking lab access</li>
+                            <li>Partnership with tech companies</li>
+                            <li>Portfolio-based assessment</li>
+                        </ul>
+                        <a href="admissions.html" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="program-detail-card reveal">
+                    <div class="program-card-img-wrapper">
+                        <img src="images/event.jpg" alt="MBA Financial Management">
+                        <span class="program-tag">Executive</span>
+                    </div>
+                    <div class="program-detail-content">
+                        <h3>MBA in Financial Management</h3>
+                        <p>Designed for mid-career professionals, this executive MBA blends strategic leadership with
+                            advanced financial management. Covers corporate finance, mergers, risk governance, and
+                            portfolio management.</p>
+                        <ul class="program-features">
+                            <li>Weekend/evening classes available</li>
+                            <li>2-year executive format</li>
+                            <li>Case study methodology</li>
+                            <li>Networking with industry leaders</li>
+                        </ul>
+                        <a href="admissions.html" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="program-detail-card reveal">
+                    <div class="program-card-img-wrapper">
+                        <img src="images/about_img.jpg" alt="Risk Management">
+                        <span class="program-tag">Diploma</span>
+                    </div>
+                    <div class="program-detail-content">
+                        <h3>Diploma in Risk Management</h3>
+                        <p>A focused 12-month diploma that prepares students for roles in enterprise risk management,
+                            credit risk, operational risk, and regulatory compliance within banking institutions.</p>
+                        <ul class="program-features">
+                            <li>Basel III framework coverage</li>
+                            <li>Practical risk modeling exercises</li>
+                            <li>Industry case studies</li>
+                            <li>Certification-ready curriculum</li>
+                        </ul>
+                        <a href="admissions.html" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="program-detail-card reveal">
+                    <div class="program-card-img-wrapper">
+                        <img src="images/hero_bg.jpg" alt="CIPA Certification">
+                        <span class="program-tag">Certification</span>
+                    </div>
+                    <div class="program-detail-content">
+                        <h3>Certified Islamic Professional Accountant (CIPA)</h3>
+                        <p>An internationally recognized certification program aligned with AAOIFI standards. Covers
+                            Islamic accounting, auditing, governance, and ethics for financial institutions operating
+                            under Shari'ah principles.</p>
+                        <ul class="program-features">
+                            <li>AAOIFI internationally recognized</li>
+                            <li>Online + in-person hybrid</li>
+                            <li>Exam preparation included</li>
+                            <li>CPD credits awarded</li>
+                        </ul>
+                        <a href="admissions.html" class="btn btn-primary">Apply Now</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Fields of Specialization -->
+    <section style="background: #f8fcf9;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Fields of Specialization</h2>
+                <span></span>
+            </div>
+            <div class="values-grid">
+                <div class="card reveal" style="padding: 2rem; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.8rem;">🕌</div>
+                    <h4>Islamic Finance</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Shari'ah-compliant
+                        banking, Sukuk & Takaful</p>
+                </div>
+                <div class="card reveal" style="padding: 2rem; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.8rem; color: var(--primary-color);"><i
+                            class="fas fa-university"></i></div>
+                    <h4>Core Banking</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Operations, Credit
+                        Analysis, Treasury</p>
+                </div>
+                <div class="card reveal" style="padding: 2rem; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.8rem; color: var(--primary-color);"><i
+                            class="fas fa-chart-bar"></i></div>
+                    <h4>Risk & Compliance</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">AML, Basel III,
+                        Enterprise Risk</p>
+                </div>
+                <div class="card reveal" style="padding: 2rem; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.8rem; color: var(--primary-color);"><i
+                            class="fas fa-laptop-code"></i></div>
+                    <h4>FinTech & Digital</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Blockchain, Mobile
+                        Banking, AI</p>
+                </div>
+                <div class="card reveal" style="padding: 2rem; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.8rem; color: var(--primary-color);"><i
+                            class="fas fa-chart-line"></i></div>
+                    <h4>Investment & Wealth</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Portfolio, Capital
+                        Markets, Valuation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Programs Table -->
+    <section id="all-programs">
+        <div class="container">
+            <div class="section-title">
+                <h2>All Academic Programs</h2>
+                <span></span>
+            </div>
+
+            <!-- Search -->
+            <div class="search-wrapper reveal">
+                <input type="text" id="programSearch" placeholder="Search by name, ID, or specialization...">
+            </div>
+
+            <div class="program-table-card reveal">
+                <table class="program-table">
+                    <thead>
+                        <tr>
+                            <th width="12%">ID</th>
+                            <th width="50%">Certificate / Degree Name</th>
+                            <th>Field of Specialization</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="id-badge">PG001</span></td>
+                            <td>Master in Islamic Banking & Finance</td>
+                            <td>Islamic Finance</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG002</span></td>
+                            <td>BSc in Banking and Finance</td>
+                            <td>Core Banking</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG003</span></td>
+                            <td>Diploma in Risk Management</td>
+                            <td>Risk Analysis</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG004</span></td>
+                            <td>Certified Islamic Professional Accountant (CIPA)</td>
+                            <td>Islamic Accounting</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG005</span></td>
+                            <td>MBA in Financial Management</td>
+                            <td>Management</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG006</span></td>
+                            <td>Shari'ah Standards Certificate</td>
+                            <td>Shari'ah Compliance</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG007</span></td>
+                            <td>Fellowship in Islamic Finance</td>
+                            <td>Academic Research</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG008</span></td>
+                            <td>Diploma in Microfinance</td>
+                            <td>Development Finance</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG009</span></td>
+                            <td>Certificate in Anti-Money Laundering</td>
+                            <td>Compliance</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG010</span></td>
+                            <td>Advanced Diploma in FinTech</td>
+                            <td>Digital Banking</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG011</span></td>
+                            <td>BSc in Accounting & Information Systems</td>
+                            <td>Accounting</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG012</span></td>
+                            <td>Executive Program in Strategic Finance</td>
+                            <td>Leadership</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG013</span></td>
+                            <td>Professional Diploma in Audit & Assurance</td>
+                            <td>Internal Audit</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG014</span></td>
+                            <td>Certified Takaful Professional</td>
+                            <td>Insurance</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG015</span></td>
+                            <td>Wealth Management Specialist</td>
+                            <td>Investment</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG016</span></td>
+                            <td>Project Finance Management</td>
+                            <td>Corporate Finance</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG017</span></td>
+                            <td>Central Banking Operations</td>
+                            <td>Monetary Policy</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG018</span></td>
+                            <td>Credit Analysis Professional</td>
+                            <td>Lending</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG019</span></td>
+                            <td>Treasury Management Certificate</td>
+                            <td>Capital Markets</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG020</span></td>
+                            <td>Quantitative Finance Diploma</td>
+                            <td>Data Science</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG021</span></td>
+                            <td>Global Financial Markets MSc</td>
+                            <td>Investment Banking</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG022</span></td>
+                            <td>Professional Ethics in Banking</td>
+                            <td>Ethics</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG023</span></td>
+                            <td>Public Finance Management</td>
+                            <td>Government Finance</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG024</span></td>
+                            <td>SME Finance Development</td>
+                            <td>Entrepreneurial Finance</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG025</span></td>
+                            <td>International Financial Reporting (IFRS)</td>
+                            <td>Reporting Standards</td>
+                        </tr>
+                        <tr>
+                            <td><span class="id-badge">PG026</span></td>
+                            <td>PhD in Finance & Economics</td>
+                            <td>Doctoral Research</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background: var(--primary-color); padding: 5rem 0; text-align: center; color: #fff;">
+        <div class="container">
+            <h2 style="font-size: 2.2rem; margin-bottom: 1.5rem;">Ready to Begin Your Journey?</h2>
+            <p style="opacity: 0.8; max-width: 500px; margin: 0 auto 2rem;">Take the first step towards a rewarding
+                career in banking and finance.</p>
+            <a href="admissions.html" class="btn-elite-primary">Start Your Application</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>SLIBF</h3>
+                    <p>Leading excellence in banking and Islamic finance education in the Horn of Africa.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="#featured">Featured Programs</a></li>
+                        <li><a href="#all-programs">All Programs</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="news.html">News & Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <p>📍 Hargeisa, Somaliland</p>
+                    <p>✉️ info@slibf.edu</p>
+                    <p>📞 +252 63 XXXXXXX</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Somaliland Institute of Banking and Finance. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Portal — SLIBF</title>
+    <link rel="stylesheet" href="css/system.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ─── Teacher-specific extras ─── */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.4rem;
+        }
+
+        .course-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-mid));
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .course-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 11px;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .course-code {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .course-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-top: 0.15rem;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .course-meta i {
+            margin-right: 0.3rem;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        /* Attendance table */
+        .att-control {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .att-control .form-group {
+            margin-bottom: 0;
+        }
+
+        .att-control label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .att-control select,
+        .att-control input[type="date"] {
+            padding: 0.65rem 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 9px;
+            font-size: 0.88rem;
+            color: var(--text-main);
+            background: var(--white);
+            min-width: 200px;
+        }
+
+        .att-control select:focus,
+        .att-control input[type="date"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .att-checkbox-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .att-radio {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .att-present:checked~* {
+            color: var(--success);
+        }
+
+        .remarks-input {
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.35rem 0.6rem;
+            font-size: 0.8rem;
+            width: 130px;
+            color: var(--text-main);
+            font-family: inherit;
+        }
+
+        .remarks-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Grade badge */
+        .grade-A {
+            color: var(--success);
+            font-weight: 800;
+        }
+
+        .grade-B {
+            color: var(--info);
+            font-weight: 700;
+        }
+
+        .grade-C {
+            color: var(--warning);
+            font-weight: 700;
+        }
+
+        .grade-D {
+            color: #e67e22;
+            font-weight: 700;
+        }
+
+        .grade-F {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .marks-input {
+            width: 80px;
+            border: 1.5px solid var(--border);
+            border-radius: 7px;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.88rem;
+            text-align: center;
+            font-family: inherit;
+            color: var(--text-main);
+        }
+
+        .marks-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .success-banner {
+            background: var(--success-light);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 0.85rem 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: none;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 1.2rem;
+            animation: fadeInPage 0.3s ease;
+        }
+
+        .success-banner.show {
+            display: flex;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 2.5rem;
+            opacity: 0.3;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state p {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body class="page-fade">
+
+    <div class="sys-layout">
+
+        <!-- ═══ SIDEBAR ═══════════════════════════════════════ -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo-box"><i class="fas fa-university"></i></div>
+                <div class="sidebar-brand">
+                    <h2>SLIBF</h2><span>Teacher Portal</span>
+                </div>
+            </div>
+            <div class="sidebar-user">
+                <div class="sidebar-avatar"><i class="fas fa-chalkboard-teacher"></i></div>
+                <div class="sidebar-user-info">
+                    <h4 id="sidebar-name">Loading…</h4>
+                    <span>Teacher</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <span class="nav-section-label">Navigation</span>
+                <ul>
+                    <li><a href="#" class="active" data-panel="panel-dashboard"><i
+                                class="fas fa-th-large"></i><span>Dashboard</span></a></li>
+                    <li><a href="#" data-panel="panel-courses"><i class="fas fa-book-open"></i><span>My
+                                Courses</span></a></li>
+                    <li><a href="#" data-panel="panel-attendance"><i class="fas fa-clipboard-check"></i><span>Attendance
+                                Management</span></a></li>
+                    <li><a href="#" data-panel="panel-results"><i class="fas fa-graduation-cap"></i><span>Exam
+                                Results</span></a></li>
+                </ul>
+                <div class="nav-divider"></div>
+                <span class="nav-section-label">Account</span>
+                <ul>
+                    <li><a href="login.html" style="color:rgba(255,255,255,0.55);">
+                            <i class="fas fa-question-circle"></i><span>Help & Support</span>
+                        </a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-bottom">
+                <button class="btn-logout" onclick="Auth.logout()"><i
+                        class="fas fa-sign-out-alt"></i><span>Logout</span></button>
+            </div>
+        </aside>
+
+        <!-- ═══ MAIN CONTENT ════════════════════════════════════ -->
+        <div class="main-content">
+            <div class="topbar">
+                <div class="topbar-left">
+                    <button class="hamburger-btn" id="hamburger-btn"><i class="fas fa-bars"></i></button>
+                    <div>
+                        <div class="topbar-title" id="topbar-title">Dashboard</div>
+                        <div class="topbar-subtitle" id="topbar-date"></div>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <span class="topbar-time" id="live-time"></span>
+                    <div class="topbar-btn" title="Notifications"><i class="fas fa-bell"></i></div>
+                    <div class="topbar-btn" onclick="Auth.logout()" title="Logout"><i class="fas fa-sign-out-alt"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-content">
+
+                <!-- ═══ PANEL: DASHBOARD ═════════════════════════ -->
+                <div class="panel active" id="panel-dashboard">
+                    <div class="page-header">
+                        <h2 id="welcome-heading">Welcome, Teacher!</h2>
+                        <p>Your academic overview for Spring 2026.</p>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card green">
+                            <div class="stat-icon green"><i class="fas fa-book-open"></i></div>
+                            <div class="stat-value" id="cnt-courses" data-count="0">0</div>
+                            <div class="stat-label">Assigned Courses</div>
+                            <div class="stat-trend"><i class="fas fa-calendar-check"></i> Spring 2026</div>
+                        </div>
+                        <div class="stat-card blue">
+                            <div class="stat-icon blue"><i class="fas fa-users"></i></div>
+                            <div class="stat-value" id="cnt-students" data-count="0">0</div>
+                            <div class="stat-label">Total Students</div>
+                        </div>
+                        <div class="stat-card gold">
+                            <div class="stat-icon gold"><i class="fas fa-calendar-alt"></i></div>
+                            <div class="stat-value" id="cnt-exams" data-count="3">0</div>
+                            <div class="stat-label">Upcoming Exams</div>
+                            <div class="stat-trend"><i class="fas fa-clock"></i> Next: March 15</div>
+                        </div>
+                        <div class="stat-card red">
+                            <div class="stat-icon red"><i class="fas fa-edit"></i></div>
+                            <div class="stat-value" id="cnt-pending" data-count="0">0</div>
+                            <div class="stat-label">Pending Result Entries</div>
+                        </div>
+                    </div>
+
+                    <!-- Course quick-view -->
+                    <div class="table-card">
+                        <div class="table-head">
+                            <h3>My Courses This Semester</h3>
+                            <button class="btn btn-outline btn-sm" onclick="switchPanel('panel-courses')">View All <i
+                                    class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Course Name</th>
+                                    <th>Students</th>
+                                    <th>Credits</th>
+                                    <th>Quick Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dash-courses-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ═══ PANEL: MY COURSES ════════════════════════ -->
+                <div class="panel" id="panel-courses">
+                    <div class="page-header">
+                        <h2>My Courses</h2>
+                        <p>All courses assigned to you for Spring 2026.</p>
+                    </div>
+                    <div class="course-grid" id="courses-grid"></div>
+                </div>
+
+                <!-- ═══ PANEL: ATTENDANCE ════════════════════════ -->
+                <div class="panel" id="panel-attendance">
+                    <div class="page-header">
+                        <h2>Attendance Management</h2>
+                        <p>Mark and save daily attendance for your students.</p>
+                    </div>
+
+                    <div class="att-control">
+                        <div class="form-group">
+                            <label><i class="fas fa-book-open" style="margin-right:0.3rem;"></i>Select Course</label>
+                            <select id="att-course-sel" onchange="loadAttendance()">
+                                <option value="">— Choose a course —</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar" style="margin-right:0.3rem;"></i>Select Date</label>
+                            <input type="date" id="att-date" onchange="loadAttendance()">
+                        </div>
+                    </div>
+
+                    <div class="success-banner" id="att-success">
+                        <i class="fas fa-check-circle"></i>
+                        Attendance saved successfully!
+                    </div>
+
+                    <div id="att-table-wrap">
+                        <div class="empty-state">
+                            <i class="fas fa-clipboard-check"></i>
+                            <p>Select a course and date above to load the student list.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ PANEL: EXAM RESULTS ══════════════════════ -->
+                <div class="panel" id="panel-results">
+                    <div class="page-header">
+                        <h2>Exam Results</h2>
+                        <p>Enter and manage student exam marks and grades.</p>
+                    </div>
+
+                    <div class="att-control">
+                        <div class="form-group">
+                            <label><i class="fas fa-book-open" style="margin-right:0.3rem;"></i>Select Course</label>
+                            <select id="res-course-sel" onchange="loadResults()">
+                                <option value="">— Choose a course —</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-file-alt" style="margin-right:0.3rem;"></i>Exam Type</label>
+                            <select id="res-exam-type" onchange="loadResults()">
+                                <option value="">— Select Exam Type —</option>
+                                <option value="Midterm">Midterm Exam</option>
+                                <option value="Final">Final Exam</option>
+                                <option value="Quiz">Quiz / Assignment</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="success-banner" id="res-success">
+                        <i class="fas fa-check-circle"></i>
+                        Results saved successfully!
+                    </div>
+
+                    <div id="res-table-wrap">
+                        <div class="empty-state">
+                            <i class="fas fa-graduation-cap"></i>
+                            <p>Select a course and exam type to load the results entry form.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /page-content -->
+        </div><!-- /main-content -->
+    </div><!-- /sys-layout -->
+
+    <div id="sys-toast" class="toast"></div>
+
+    <script src="js/system.js"></script>
+    <script>
+        // ────────────────────────────────────────────────
+        //  INIT
+        // ────────────────────────────────────────────────
+        let teacherCourses = [];
+        let currentSession = null;
+
+        (function () {
+            currentSession = Auth.requireRole('teacher');
+            if (!currentSession) return;
+
+            document.getElementById('sidebar-name').textContent = currentSession.name.split(' ').slice(0, 3).join(' ');
+            document.getElementById('welcome-heading').textContent = `Welcome, ${currentSession.name.split(' ')[0]}!`;
+            document.getElementById('topbar-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+            document.getElementById('att-date').value = new Date().toISOString().split('T')[0];
+
+            initLiveTime();
+            initSidebar();
+            initAutoLogout(15);
+
+            // Filter courses to this teacher
+            teacherCourses = DB.courses.filter(c => c.teacherId === currentSession.id);
+
+            // Populate stats
+            const uniqueStudents = [...new Set(teacherCourses.flatMap(c => c.studentIds))];
+            document.getElementById('cnt-courses').dataset.count = teacherCourses.length;
+            document.getElementById('cnt-students').dataset.count = uniqueStudents.length;
+            document.getElementById('cnt-pending').dataset.count = teacherCourses.length; // all pending until saved
+            initCounters();
+
+            renderDashboard();
+            renderCourseGrid();
+            populateCourseDropdowns();
+        })();
+
+        // ────────────────────────────────────────────────
+        //  DASHBOARD
+        // ────────────────────────────────────────────────
+        function renderDashboard() {
+            const tbody = document.getElementById('dash-courses-tbody');
+            if (!teacherCourses.length) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-muted);">No courses assigned.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = teacherCourses.map(c => `
+        <tr>
+            <td><span class="badge badge-info">${c.code}</span></td>
+            <td><strong>${c.name}</strong></td>
+            <td>${c.studentIds.length} students</td>
+            <td>${c.credits} credits</td>
+            <td style="display:flex;gap:0.5rem;">
+                <button class="btn btn-outline btn-sm" onclick="goAttendance('${c.id}')"><i class="fas fa-clipboard-check"></i> Attendance</button>
+                <button class="btn btn-primary btn-sm" onclick="goResults('${c.id}')"><i class="fas fa-graduation-cap"></i> Results</button>
+            </td>
+        </tr>
+    `).join('');
+        }
+
+        // ────────────────────────────────────────────────
+        //  COURSES GRID
+        // ────────────────────────────────────────────────
+        function renderCourseGrid() {
+            const grid = document.getElementById('courses-grid');
+            if (!teacherCourses.length) {
+                grid.innerHTML = `<div class="empty-state"><i class="fas fa-book-open"></i><p>No courses assigned to you yet.</p></div>`;
+                return;
+            }
+            grid.innerHTML = teacherCourses.map(c => `
+        <div class="course-card">
+            <div class="course-card-header">
+                <div class="course-icon"><i class="fas fa-book"></i></div>
+                <div>
+                    <div class="course-code">${c.code} &bull; ${c.semester}</div>
+                    <div class="course-name">${c.name}</div>
+                </div>
+            </div>
+            <div class="course-meta">
+                <span><i class="fas fa-users"></i>${c.studentIds.length} Students</span>
+                <span><i class="fas fa-star"></i>${c.credits} Credits</span>
+            </div>
+            <div class="course-actions">
+                <button class="btn btn-outline btn-sm" style="flex:1" onclick="goAttendance('${c.id}')">
+                    <i class="fas fa-clipboard-check"></i> Attendance
+                </button>
+                <button class="btn btn-primary btn-sm" style="flex:1" onclick="goResults('${c.id}')">
+                    <i class="fas fa-graduation-cap"></i> Results
+                </button>
+            </div>
+        </div>
+    `).join('');
+        }
+
+        // ────────────────────────────────────────────────
+        //  DROPDOWNS
+        // ────────────────────────────────────────────────
+        function populateCourseDropdowns() {
+            ['att-course-sel', 'res-course-sel'].forEach(id => {
+                const sel = document.getElementById(id);
+                teacherCourses.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.id;
+                    opt.textContent = `${c.code} — ${c.name}`;
+                    sel.appendChild(opt);
+                });
+            });
+        }
+
+        // Quick nav helpers
+        window.goAttendance = function (courseId) {
+            switchPanel('panel-attendance');
+            document.getElementById('att-course-sel').value = courseId;
+            loadAttendance();
+        };
+        window.goResults = function (courseId) {
+            switchPanel('panel-results');
+            document.getElementById('res-course-sel').value = courseId;
+        };
+
+        // ────────────────────────────────────────────────
+        //  ATTENDANCE
+        // ────────────────────────────────────────────────
+        function getCoursestudents(courseId) {
+            const course = DB.courses.find(c => c.id === courseId);
+            if (!course) return [];
+            return course.studentIds.map(sid => DB.students.find(s => s.id === sid)).filter(Boolean);
+        }
+
+        window.loadAttendance = function () {
+            const courseId = document.getElementById('att-course-sel').value;
+            const date = document.getElementById('att-date').value;
+            const wrap = document.getElementById('att-table-wrap');
+            document.getElementById('att-success').classList.remove('show');
+
+            if (!courseId || !date) {
+                wrap.innerHTML = `<div class="empty-state"><i class="fas fa-clipboard-check"></i><p>Select a course and date to continue.</p></div>`;
+                return;
+            }
+
+            const students = getCoursestudents(courseId);
+            if (!students.length) {
+                wrap.innerHTML = `<div class="empty-state"><i class="fas fa-users"></i><p>No students enrolled in this course.</p></div>`;
+                return;
+            }
+
+            // Load saved attendance from localStorage
+            const savedKey = `slibf_att_${courseId}_${date}`;
+            const savedData = JSON.parse(localStorage.getItem(savedKey) || '{}');
+
+            wrap.innerHTML = `
+        <div class="table-card">
+            <div class="table-head">
+                <h3><i class="fas fa-users" style="margin-right:0.5rem;color:var(--primary);"></i>${students.length} Students</h3>
+                <button class="btn btn-primary" onclick="saveAttendance('${courseId}','${date}')">
+                    <i class="fas fa-save"></i> Save Attendance
+                </button>
+            </div>
+            <table class="data-table" id="att-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Student Name</th>
+                        <th>Student ID</th>
+                        <th style="text-align:center;">Present</th>
+                        <th style="text-align:center;">Absent</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${students.map((s, i) => {
+                const saved = savedData[s.id] || '';
+                return `<tr>
+                            <td>${i + 1}</td>
+                            <td><strong>${s.name}</strong></td>
+                            <td><span class="badge badge-gray">${s.id}</span></td>
+                            <td class="att-checkbox-cell">
+                                <input type="radio" class="att-radio" name="att-${s.id}" value="present"
+                                    id="p-${s.id}" ${saved === 'present' ? 'checked' : ''}
+                                    onchange="syncStatus('${s.id}','present')">
+                            </td>
+                            <td class="att-checkbox-cell">
+                                <input type="radio" class="att-radio" name="att-${s.id}" value="absent"
+                                    id="a-${s.id}" ${saved === 'absent' ? 'checked' : ''}
+                                    onchange="syncStatus('${s.id}','absent')"
+                                    style="accent-color:var(--danger);">
+                            </td>
+                            <td>
+                                <input class="remarks-input" type="text" id="rem-${s.id}"
+                                    placeholder="Optional note…" value="${savedData[s.id + '_rem'] || ''}">
+                            </td>
+                        </tr>`;
+            }).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+        };
+
+        window.syncStatus = function (stuId, status) { /* radio handles it automatically */ };
+
+        window.saveAttendance = function (courseId, date) {
+            // TODO: POST /api/attendance
+            const students = getCoursestudents(courseId);
+            const data = {};
+            students.forEach(s => {
+                const present = document.getElementById(`p-${s.id}`)?.checked;
+                const absent = document.getElementById(`a-${s.id}`)?.checked;
+                data[s.id] = present ? 'present' : absent ? 'absent' : 'unmarked';
+                data[s.id + '_rem'] = document.getElementById(`rem-${s.id}`)?.value || '';
+            });
+
+            localStorage.setItem(`slibf_att_${courseId}_${date}`, JSON.stringify(data));
+            document.getElementById('att-success').classList.add('show');
+            setTimeout(() => document.getElementById('att-success').classList.remove('show'), 4000);
+            showToast('Attendance saved successfully!', 'success');
+        };
+
+        // ────────────────────────────────────────────────
+        //  EXAM RESULTS
+        // ────────────────────────────────────────────────
+        window.loadResults = function () {
+            const courseId = document.getElementById('res-course-sel').value;
+            const examType = document.getElementById('res-exam-type').value;
+            const wrap = document.getElementById('res-table-wrap');
+            document.getElementById('res-success').classList.remove('show');
+
+            if (!courseId || !examType) {
+                wrap.innerHTML = `<div class="empty-state"><i class="fas fa-graduation-cap"></i><p>Select a course and exam type to continue.</p></div>`;
+                return;
+            }
+
+            const students = getCoursestudents(courseId);
+            if (!students.length) {
+                wrap.innerHTML = `<div class="empty-state"><i class="fas fa-users"></i><p>No students enrolled in this course.</p></div>`;
+                return;
+            }
+
+            const savedKey = `slibf_res_${courseId}_${examType}`;
+            const savedData = JSON.parse(localStorage.getItem(savedKey) || '{}');
+
+            wrap.innerHTML = `
+        <div class="table-card">
+            <div class="table-head">
+                <h3><i class="fas fa-graduation-cap" style="margin-right:0.5rem;color:var(--primary);"></i>${examType} — ${students.length} Students</h3>
+                <button class="btn btn-primary" onclick="saveResults('${courseId}','${examType}')">
+                    <i class="fas fa-save"></i> Save Results
+                </button>
+            </div>
+            <div style="background:var(--primary-light);border-radius:10px;padding:0.8rem 1.2rem;margin:0 1.5rem 1rem;font-size:0.82rem;color:var(--primary);font-weight:600;">
+                <i class="fas fa-info-circle" style="margin-right:0.4rem;"></i>
+                Grading: A (90-100) &bull; B (80-89) &bull; C (70-79) &bull; D (60-69) &bull; F (&lt;60) &bull; Pass ≥ 60
+            </div>
+            <table class="data-table" id="res-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Student Name</th>
+                        <th>Student ID</th>
+                        <th style="text-align:center;">Marks (0-100)</th>
+                        <th style="text-align:center;">Grade</th>
+                        <th style="text-align:center;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${students.map((s, i) => {
+                const saved = savedData[s.id] || {};
+                return `<tr>
+                            <td>${i + 1}</td>
+                            <td><strong>${s.name}</strong></td>
+                            <td><span class="badge badge-gray">${s.id}</span></td>
+                            <td style="text-align:center;">
+                                <input class="marks-input" type="number" min="0" max="100"
+                                    id="marks-${s.id}" value="${saved.marks ?? ''}"
+                                    placeholder="—"
+                                    oninput="updateGradeRow('${s.id}')">
+                            </td>
+                            <td style="text-align:center;" id="grade-cell-${s.id}">
+                                ${saved.grade ? `<span class="grade-${saved.grade}">${saved.grade}</span>` : '<span style="color:var(--text-muted);">—</span>'}
+                            </td>
+                            <td style="text-align:center;" id="status-cell-${s.id}">
+                                ${saved.status ? statusBadge(saved.status) : '<span style="color:var(--text-muted);">—</span>'}
+                            </td>
+                        </tr>`;
+            }).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
+        };
+
+        window.updateGradeRow = function (stuId) {
+            const marks = document.getElementById(`marks-${stuId}`)?.value;
+            const { grade, status } = calcGrade(marks);
+            document.getElementById(`grade-cell-${stuId}`).innerHTML =
+                grade === '—' ? '<span style="color:var(--text-muted);">—</span>' : `<span class="grade-${grade}">${grade}</span>`;
+            document.getElementById(`status-cell-${stuId}`).innerHTML =
+                status === '—' ? '<span style="color:var(--text-muted);">—</span>' : statusBadge(status);
+        };
+
+        window.saveResults = function (courseId, examType) {
+            // TODO: POST /api/results
+            const students = getCoursestudents(courseId);
+            const data = {};
+            let incomplete = false;
+
+            students.forEach(s => {
+                const marks = document.getElementById(`marks-${s.id}`)?.value;
+                if (marks === '' || marks === null || marks === undefined) { incomplete = true; return; }
+                const { grade, status } = calcGrade(marks);
+                data[s.id] = { marks: parseFloat(marks), grade, status };
+            });
+
+            if (incomplete) { showToast('Please enter marks for all students before saving.', 'warning'); return; }
+
+            localStorage.setItem(`slibf_res_${courseId}_${examType}`, JSON.stringify(data));
+            document.getElementById('res-success').classList.add('show');
+            setTimeout(() => document.getElementById('res-success').classList.remove('show'), 4000);
+            showToast('Exam results saved successfully!', 'success');
+        };
+    </script>
+</body>
+
+</html>
