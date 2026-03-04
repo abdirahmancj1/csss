@@ -39,45 +39,98 @@
             box-shadow: 0 10px 20px rgba(11, 110, 79, 0.2);
         }
 
+        /* Form Styling Updated to match image_cbb640.png */
         .admission-form-wrapper {
             max-width: 800px;
             margin: 4rem auto;
             background: white;
-            padding: 4rem;
-            border-radius: 30px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.08);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             border: 1px solid #eee;
+        }
+
+        .form-header { text-align: center; margin-bottom: 2.5rem; }
+        .form-header i { font-size: 3rem; color: #0b6e4f; margin-bottom: 1rem; }
+        .form-header h2 { text-transform: uppercase; font-size: 1.4rem; letter-spacing: 1px; color: #333; }
+
+        .section-label {
+            color: #0b6e4f;
+            font-weight: 800;
+            font-size: 0.85rem;
+            margin: 2rem 0 1rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .full-width {
             grid-column: span 2;
         }
 
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 700; font-size: 0.85rem; color: #444; }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.85rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            background: #fdfdfd;
+        }
+
+        /* Program Selection Styling */
+        .program-option {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            border: 1px solid #eee;
+            transition: 0.2s;
+        }
+        .program-option:hover { background: #f0f7f4; }
+        .program-option input { width: 18px; height: 18px; accent-color: #0b6e4f; cursor: pointer; }
+        .program-option span { font-size: 0.9rem; font-weight: 500; color: #333; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.1rem;
+            background: #0b6e4f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 2rem;
+            transition: 0.3s;
+        }
+        .btn-submit:hover { background: #08563e; }
+
         @media (max-width: 768px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .full-width {
-                grid-column: span 1;
-            }
-
-            .admission-form-wrapper {
-                padding: 2rem;
-            }
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .admission-form-wrapper { padding: 2rem; }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Utility Top Bar -->
     <div class="top-bar">
         <div class="container top-bar-container">
             <div class="top-bar-info">
@@ -91,7 +144,6 @@
         </div>
     </div>
 
-    <!-- Navigation -->
     <nav>
         <div class="container nav-container">
             <a href="index.html" class="logo">
@@ -111,7 +163,6 @@
         </div>
     </nav>
 
-    <!-- Page Hero -->
     <header class="page-hero">
         <div class="container">
             <h1>Join the Class of 2026</h1>
@@ -119,7 +170,6 @@
         </div>
     </header>
 
-    <!-- Section: Requirements -->
     <section id="requirements">
         <div class="container">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
@@ -159,7 +209,6 @@
         </div>
     </section>
 
-    <!-- Section: Application Process -->
     <section id="process" style="background-color: #f8fcf9;">
         <div class="container">
             <div class="section-title">
@@ -170,85 +219,99 @@
                 <div class="process-step reveal">
                     <div class="step-number"><i class="fas fa-search"></i></div>
                     <h4>Choose Program</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">Select your field of
-                        interest.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">Select your field of interest.</p>
                 </div>
                 <div class="process-step reveal">
                     <div class="step-number"><i class="fas fa-file-alt"></i></div>
                     <h4>Submit Form</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">Fill the online or paper
-                        form.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">Fill the registration form below.</p>
                 </div>
                 <div class="process-step reveal">
                     <div class="step-number"><i class="fas fa-upload"></i></div>
                     <h4>Submit Docs</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">Upload required
-                        certifications.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">Upload required certifications.</p>
                 </div>
                 <div class="process-step reveal">
                     <div class="step-number"><i class="fas fa-user-check"></i></div>
                     <h4>Evaluation</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">Our board reviews your
-                        data.</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">Our board reviews your data.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Section: Apply Now Form -->
     <section id="apply">
         <div class="container">
             <div class="admission-form-wrapper reveal">
-                <div class="section-title">
-                    <h2>Apply Now</h2>
-                    <span></span>
-                    <p style="margin-top: 1.5rem; color: var(--text-muted);">Start your application today. All fields
-                        marked * are required.</p>
+                <div class="form-header">
+                    <i class="fas fa-university"></i>
+                    <h2>Programmes Registration Form</h2>
+                    <p style="color: #666; font-size: 0.9rem;">Fadlan buuxi dhamaan xogta looga baahan yahay codsigaaga.</p>
                 </div>
 
                 <form id="admissionForm">
+                    <div class="section-label">First: Personal Information</div>
                     <div class="form-grid">
-                        <div class="form-group">
-                            <label>Full Name *</label>
-                            <input type="text" class="form-control" name="name" required placeholder="Ahmed Mohamed">
-                            <span class="error-msg"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Email Address *</label>
-                            <input type="email" class="form-control" name="email" required
-                                placeholder="ahmed@example.com">
-                            <span class="error-msg"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Phone Number *</label>
-                            <input type="tel" class="form-control" name="phone" required placeholder="+252 63 XXX XXX">
-                            <span class="error-msg"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Program Selection *</label>
-                            <select class="form-control" name="program" required>
-                                <option value="">Select a Program</option>
-                                <option value="PG001">Master in Islamic Banking</option>
-                                <option value="PG002">BSc in Banking & Finance</option>
-                                <option value="PG010">Advanced Diploma in FinTech</option>
-                            </select>
-                            <span class="error-msg"></span>
-                        </div>
                         <div class="form-group full-width">
-                            <label>Personal Statement / Message</label>
-                            <textarea class="form-control" name="message" rows="6"
-                                placeholder="Tell us about your background and motivation..."></textarea>
+                            <label>Full Name (English) *</label>
+                            <input type="text" id="app_name" class="form-control" placeholder="Tusaale: Mohamed Ahmed Ali" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nationality *</label>
+                            <input type="text" id="app_nationality" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Country *</label>
+                            <input type="text" id="app_country" class="form-control" required>
                         </div>
                     </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.2rem;"><i
-                            class="fas fa-paper-plane" style="margin-right:0.5rem;"></i> Submit Application</button>
+
+                    <div class="section-label">Second: Contact Information</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" id="app_email" class="form-control" placeholder="name@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile Number *</label>
+                            <input type="tel" id="app_phone" class="form-control" placeholder="+252 63 XXXXXXX" required>
+                        </div>
+                    </div>
+
+                    <div class="section-label">Third: Programme Selection</div>
+                    <div id="program-options">
+                        <label class="program-option">
+                            <input type="radio" name="program" value="Certified Islamic Banking Expert (CIBE)" required>
+                            <span>Certified Islamic Banking Expert (CIBE)</span>
+                        </label>
+                        <label class="program-option">
+                            <input type="radio" name="program" value="Certified Islamic Insurance Expert (CIIE)">
+                            <span>Certified Islamic Insurance Expert (CIIE)</span>
+                        </label>
+                        <label class="program-option">
+                            <input type="radio" name="program" value="Certified Public Finance Expert (CPFE)">
+                            <span>Certified Public Finance Expert (CPFE)</span>
+                        </label>
+                        <label class="program-option">
+                            <input type="radio" name="program" value="Institute Foundation Program (IFP)">
+                            <span>Institute Foundation Program (IFP)</span>
+                        </label>
+                    </div>
+
+                    <div class="section-label">Fourth: Registration Date</div>
+                    <div class="form-group" style="max-width: 300px;">
+                        <label>Date *</label>
+                        <input type="date" id="app_date" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> GUBDI CODSIGA (SUBMIT)
+                    </button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-bottom">
@@ -257,6 +320,39 @@
         </div>
     </footer>
 
+    <script>
+        // Form Submission to connect with Registrar Dashboard
+        document.getElementById('admissionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Helitaanka xogta la geliyey
+            const name = document.getElementById('app_name').value;
+            const email = document.getElementById('app_email').value;
+            const phone = document.getElementById('app_phone').value;
+            const program = document.querySelector('input[name="program"]:checked').value;
+            const regDate = document.getElementById('app_date').value;
+
+            // Sameynta Object-ga codsiga cusub
+            const newApp = {
+                id: 'APP-' + Math.floor(1000 + Math.random() * 9000),
+                name: name,
+                email: email,
+                phone: phone,
+                program: program,
+                date: regDate,
+                status: 'Pending'
+            };
+
+            // Keydinta xogta LocalStorage-ka si uu Dashboard-ku u arko
+            let currentApps = JSON.parse(localStorage.getItem('slibf_apps')) || [];
+            currentApps.push(newApp);
+            localStorage.setItem('slibf_apps', JSON.stringify(currentApps));
+
+            // Farriin guul ah iyo sifeynta foomka
+            alert('Mahadsanid! Codsigaaga si guul leh ayaa loo gudbiyey.');
+            this.reset();
+        });
+    </script>
     <script src="js/script.js"></script>
 </body>
 
