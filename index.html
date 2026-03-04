@@ -310,46 +310,14 @@
     <section>
         <div class="container">
             <div class="section-title">
-                <h2>News & Recent Events</h2>
+                <h2>News &amp; Recent Events</h2>
                 <span></span>
             </div>
-            <div class="news-grid">
-                <article class="news-card reveal">
-                    <img src="images/graduates.jpg" class="news-img" alt="Graduation Event">
-                    <div class="news-content">
-                        <span class="news-date">March 02, 2026</span>
-                        <h3>Celebrating our first batch of Islamic Finance Graduates</h3>
-                        <p>A historic milestone as SLIBF graduates its first cohort of professional master students.</p>
-                        <br>
-                        <a href="news.html"
-                            style="color: var(--primary-color); font-weight: 700; text-decoration: none;">Read More
-                            →</a>
-                    </div>
-                </article>
-                <article class="news-card reveal">
-                    <img src="images/faculty.jpg" class="news-img" alt="Conference">
-                    <div class="news-content">
-                        <span class="news-date">Feb 15, 2026</span>
-                        <h3>International Conference on Digital Banking</h3>
-                        <p>Leading experts gathered at SLIBF to discuss the future of FinTech in East Africa.</p>
-                        <br>
-                        <a href="news.html"
-                            style="color: var(--primary-color); font-weight: 700; text-decoration: none;">Read More
-                            →</a>
-                    </div>
-                </article>
-                <article class="news-card reveal">
-                    <img src="images/hero_bg.jpg" class="news-img" alt="Partnership">
-                    <div class="news-content">
-                        <span class="news-date">Jan 28, 2026</span>
-                        <h3>New Partnership with BIBF for Professional Training</h3>
-                        <p>Expanding our reach through strategic international academic alliances.</p>
-                        <br>
-                        <a href="news.html"
-                            style="color: var(--primary-color); font-weight: 700; text-decoration: none;">Read More
-                            →</a>
-                    </div>
-                </article>
+            <div class="news-grid" id="home-news-grid">
+                <!-- Dynamically filled by script below -->
+            </div>
+            <div style="text-align:center; margin-top:2.5rem;">
+                <a href="news.html" class="btn btn-primary">View All News &amp; Events →</a>
             </div>
         </div>
     </section>
@@ -419,6 +387,83 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+        // ── Live News from Registrar Dashboard ──────────────
+        (function () {
+            const STATIC_NEWS = [
+                {
+                    title: 'Celebrating our first batch of Islamic Finance Graduates',
+                    content: 'A historic milestone as SLIBF graduates its first cohort of professional master students.',
+                    date: 'March 02, 2026',
+                    category: 'Event',
+                    img: 'images/graduates.jpg'
+                },
+                {
+                    title: 'International Conference on Digital Banking',
+                    content: 'Leading experts gathered at SLIBF to discuss the future of FinTech in East Africa.',
+                    date: 'Feb 15, 2026',
+                    category: 'Event',
+                    img: 'images/faculty.jpg'
+                },
+                {
+                    title: 'New Partnership with BIBF for Professional Training',
+                    content: 'Expanding our reach through strategic international academic alliances.',
+                    date: 'Jan 28, 2026',
+                    category: 'Partnership',
+                    img: 'images/hero_bg.jpg'
+                }
+            ];
+
+            function formatDate(iso) {
+                if (!iso) return '';
+                const d = new Date(iso);
+                return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            }
+
+            function newsCardHTML(item, isLive) {
+                if (isLive) {
+                    // Cards from registrar dashboard (no image, use gradient header)
+                    return `
+                        <article class="news-card reveal" style="display:flex; flex-direction:column;">
+                            <div style="background:linear-gradient(135deg,#064e3b,#0b6e4f); padding:1.5rem;">
+                                <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; background:rgba(255,255,255,0.2); color:white; padding:3px 10px; border-radius:20px;">${item.category}</span>
+                                <h3 style="color:white; margin:0.8rem 0 0; font-size:1rem; line-height:1.4;">${item.title}</h3>
+                            </div>
+                            <div class="news-content" style="flex:1;">
+                                <span class="news-date">${formatDate(item.date)}</span>
+                                <p>${item.content}</p>
+                                <br>
+                                <a href="news.html" style="color:var(--primary-color); font-weight:700; text-decoration:none;">Read More →</a>
+                            </div>
+                        </article>`;
+                } else {
+                    return `
+                        <article class="news-card reveal">
+                            <img src="${item.img}" class="news-img" alt="${item.title}">
+                            <div class="news-content">
+                                <span class="news-date">${item.date}</span>
+                                <h3>${item.title}</h3>
+                                <p>${item.content}</p>
+                                <br>
+                                <a href="news.html" style="color:var(--primary-color); font-weight:700; text-decoration:none;">Read More →</a>
+                            </div>
+                        </article>`;
+                }
+            }
+
+            const grid = document.getElementById('home-news-grid');
+            const liveNews = JSON.parse(localStorage.getItem('slibf_news')) || [];
+
+            if (liveNews.length > 0) {
+                // Show up to 3 most recent live posts from registrar
+                const toShow = liveNews.slice(0, 3);
+                grid.innerHTML = toShow.map(n => newsCardHTML(n, true)).join('');
+            } else {
+                // No live news yet — fall back to static cards
+                grid.innerHTML = STATIC_NEWS.map(n => newsCardHTML(n, false)).join('');
+            }
+        })();
+    </script>
 </body>
 
 </html>

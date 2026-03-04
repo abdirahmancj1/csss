@@ -1,455 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard — SLIBF</title>
-    <link rel="stylesheet" href="css/system.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Student Portal | SIBF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #004d26; 
+            --accent: #f26522;  
+            --sidebar-dark: #00361b;
+            --bg: #f0f4f2;
+            --white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --sidebar-width: 260px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); display: flex; min-height: 100vh; }
+
+        .sidebar {
+            width: var(--sidebar-width); background: var(--primary); color: white;
+            position: fixed; height: 100vh; padding: 30px 20px; display: flex;
+            flex-direction: column; z-index: 100; border-right: 4px solid var(--accent);
+        }
+
+        .sidebar-brand { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 800; color: white; margin-bottom: 30px; padding-left: 10px; }
+        .sidebar-brand i { color: var(--accent); }
+
+        .sidebar-profile { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-profile img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; margin-bottom: 10px; background: #eee; }
+
+        .nav-item { display: flex; align-items: center; gap: 15px; padding: 14px 18px; color: #e2e8f0; text-decoration: none; border-radius: 12px; margin-bottom: 8px; transition: 0.3s; cursor: pointer; }
+        .nav-item:hover { background: rgba(242, 101, 34, 0.1); color: white; }
+        .nav-item.active { background: var(--accent); color: white; font-weight: 600; box-shadow: 0 4px 12px rgba(242, 101, 34, 0.3); }
+
+        .logout-btn { margin-top: auto; color: #ffcfcf; display: flex; align-items: center; gap: 15px; padding: 14px 18px; cursor: pointer; text-decoration: none; transition: 0.3s; font-weight: 600; }
+        .logout-btn:hover { color: white; background: rgba(255,0,0,0.1); border-radius: 12px; }
+
+        .main-content { margin-left: var(--sidebar-width); padding: 40px; width: calc(100% - var(--sidebar-width)); }
+
+        header { margin-bottom: 40px; border-bottom: 2px solid #e2e8f0; padding-bottom: 20px; }
+        header h1 { font-size: 28px; color: var(--primary); font-weight: 700; }
+        header p { color: var(--text-muted); margin-top: 5px; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+
+        .stat-card {
+            background: var(--white); padding: 20px; border-radius: 16px; display: flex; align-items: center; gap: 15px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02); border-bottom: 4px solid transparent; transition: 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-5px); border-bottom: 4px solid var(--accent); }
+
+        .gpa-card-highlight { background: linear-gradient(135deg, #004d26 0%, #00361b 100%); color: white; border-bottom: 4px solid var(--accent) !important; }
+        .gpa-card-highlight .stat-info h3 { color: var(--accent); font-size: 24px; }
+        .gpa-card-highlight .icon-box { background: rgba(242, 101, 34, 0.2); color: var(--accent); }
+
+        .icon-box { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .theme-green { background: #e6f4ea; color: var(--primary); }
+        .theme-orange { background: #fff4ed; color: var(--accent); }
+        .theme-dark { background: #f1f5f9; color: var(--sidebar-dark); }
+        .theme-blue { background: #e0f2fe; color: #0369a1; }
+
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeInUp 0.5s ease; }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card-container { background: var(--white); padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); margin-bottom: 30px; }
+        .card-container h2 { color: var(--primary); margin-bottom: 20px; font-size: 20px; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 15px; color: var(--white); background: var(--primary); font-weight: 600; font-size: 14px; }
+        th:first-child { border-radius: 8px 0 0 0; }
+        th:last-child { border-radius: 0 8px 0 0; }
+        td { padding: 15px; color: var(--text-main); font-size: 14px; border-bottom: 1px solid #f1f5f9; }
+        tr:hover td { background-color: #f8fafc; }
+        
+        .badge { padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .bg-pass { background: #dcfce7; color: #166534; }
+        .bg-fail { background: #fee2e2; color: #991b1b; }
+
+        .profile-card-img { width: 110px; height: 110px; border-radius: 12px; object-fit: cover; border: 3px solid #f1f5f9; }
+        .registration-info { background: #fafafa; padding: 20px; border-radius: 12px; border-left: 5px solid var(--accent); margin-top: 20px; }
+        
+        /* New Table Style for Fee Schedule */
+        .fee-table { margin-top: 10px; }
+        .fee-table th { background: var(--sidebar-dark); }
+        .total-row { background: #f8fafc; font-weight: 700; }
+    </style>
 </head>
-
-<body class="page-fade">
-
-    <div class="sys-layout">
-
-        <!-- ═══ SIDEBAR ═══════════════════════════════════ -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-logo-box"><i class="fas fa-university"></i></div>
-                <div class="sidebar-brand">
-                    <h2>SLIBF</h2>
-                    <span>Student Portal</span>
-                </div>
-            </div>
-
-            <div class="sidebar-user">
-                <div class="sidebar-avatar"><i class="fas fa-user-graduate"></i></div>
-                <div class="sidebar-user-info">
-                    <h4 id="sidebar-name">Loading…</h4>
-                    <span>Student</span>
-                </div>
-            </div>
-
-            <nav class="sidebar-nav">
-                <span class="nav-section-label">Main Menu</span>
-                <ul>
-                    <li><a href="#" class="active" data-panel="panel-dashboard">
-                            <i class="fas fa-th-large"></i> <span>Dashboard</span>
-                        </a></li>
-                    <li><a href="#" data-panel="panel-profile">
-                            <i class="fas fa-id-card"></i> <span>My Profile</span>
-                        </a></li>
-                    <li><a href="#" data-panel="panel-fee" id="nav-fee">
-                            <i class="fas fa-money-bill-wave"></i> <span>Course Fee</span>
-                        </a></li>
-                    <li><a href="#" data-panel="panel-attendance" id="nav-attendance">
-                            <i class="fas fa-calendar-check"></i> <span>Attendance</span>
-                        </a></li>
-                    <li><a href="#" data-panel="panel-news">
-                            <i class="fas fa-newspaper"></i> <span>News</span>
-                        </a></li>
-                </ul>
-
-                <div class="nav-divider"></div>
-                <span class="nav-section-label">Account</span>
-                <ul>
-                    <li><a href="login.html" style="color:rgba(255,255,255,0.6);">
-                            <i class="fas fa-question-circle"></i> <span>Help & Support</span>
-                        </a></li>
-                </ul>
-            </nav>
-
-            <div class="sidebar-bottom">
-                <button class="btn-logout" onclick="Auth.logout()">
-                    <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
-                </button>
-            </div>
-        </aside>
-
-        <!-- ═══ MAIN CONTENT ══════════════════════════════ -->
-        <div class="main-content">
-
-            <!-- Topbar -->
-            <div class="topbar">
-                <div class="topbar-left">
-                    <button class="hamburger-btn" id="hamburger-btn"><i class="fas fa-bars"></i></button>
-                    <div>
-                        <div class="topbar-title" id="topbar-title">Dashboard</div>
-                        <div class="topbar-subtitle" id="topbar-date"></div>
-                    </div>
-                </div>
-                <div class="topbar-right">
-                    <span class="topbar-time" id="live-time"></span>
-                    <div class="topbar-btn" title="Notifications"><i class="fas fa-bell"></i></div>
-                    <div class="topbar-btn" onclick="Auth.logout()" title="Logout"><i class="fas fa-sign-out-alt"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="page-content">
-
-                <!-- Review Notice (shown if not Approved) -->
-                <div class="review-notice" id="review-notice" style="display:none;">
-                    <i class="fas fa-clock"></i>
-                    <span>Your registration is currently under review. Some sections are restricted until
-                        approval.</span>
-                </div>
-
-                <!-- ═══ PANEL: DASHBOARD ════════════════════ -->
-                <div class="panel active" id="panel-dashboard">
-                    <div class="page-header">
-                        <h2 id="welcome-heading">Welcome back!</h2>
-                        <p>Here's a summary of your academic status.</p>
-                    </div>
-
-                    <div class="stats-grid">
-                        <div class="stat-card green">
-                            <div class="stat-icon green"><i class="fas fa-graduation-cap"></i></div>
-                            <div class="stat-value" id="card-program-short">—</div>
-                            <div class="stat-label">Enrolled Program</div>
-                        </div>
-                        <div class="stat-card blue">
-                            <div class="stat-icon blue"><i class="fas fa-id-badge"></i></div>
-                            <div class="stat-value" id="card-status">—</div>
-                            <div class="stat-label">Registration Status</div>
-                        </div>
-                        <div class="stat-card gold" id="fee-card">
-                            <div class="stat-icon gold"><i class="fas fa-dollar-sign"></i></div>
-                            <div class="stat-value" id="card-balance">—</div>
-                            <div class="stat-label">Outstanding Balance</div>
-                        </div>
-                        <div class="stat-card green" id="attendance-card">
-                            <div class="stat-icon green"><i class="fas fa-calendar-check"></i></div>
-                            <div class="stat-value" id="card-attendance">—%</div>
-                            <div class="stat-label">Attendance Rate</div>
-                        </div>
-                    </div>
-
-                    <!-- Quick links -->
-                    <div
-                        style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1rem;">
-                        <div class="table-card" style="padding:1.5rem;cursor:pointer;"
-                            onclick="switchPanel('panel-fee')">
-                            <div style="display:flex;align-items:center;gap:1rem;">
-                                <div class="stat-icon gold" style="margin-bottom:0;"><i class="fas fa-receipt"></i>
-                                </div>
-                                <div>
-                                    <div style="font-weight:700;font-size:0.95rem;">View Fee Details</div>
-                                    <div style="font-size:0.78rem;color:var(--text-muted);">Total, Paid & Balance</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-card" style="padding:1.5rem;cursor:pointer;"
-                            onclick="switchPanel('panel-attendance')">
-                            <div style="display:flex;align-items:center;gap:1rem;">
-                                <div class="stat-icon green" style="margin-bottom:0;"><i
-                                        class="fas fa-clipboard-list"></i></div>
-                                <div>
-                                    <div style="font-weight:700;font-size:0.95rem;">View Attendance</div>
-                                    <div style="font-size:0.78rem;color:var(--text-muted);">Class-by-class record</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-card" style="padding:1.5rem;cursor:pointer;"
-                            onclick="switchPanel('panel-news')">
-                            <div style="display:flex;align-items:center;gap:1rem;">
-                                <div class="stat-icon blue" style="margin-bottom:0;"><i class="fas fa-newspaper"></i>
-                                </div>
-                                <div>
-                                    <div style="font-weight:700;font-size:0.95rem;">Latest News</div>
-                                    <div style="font-size:0.78rem;color:var(--text-muted);">Announcements & Events</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ═══ PANEL: MY PROFILE ══════════════════ -->
-                <div class="panel" id="panel-profile">
-                    <div class="page-header">
-                        <h2>My Profile</h2>
-                        <p>Your personal and academic information.</p>
-                    </div>
-
-                    <div class="profile-header">
-                        <div class="profile-avatar"><i class="fas fa-user-graduate"></i></div>
-                        <div class="profile-info">
-                            <h2 id="prof-name">—</h2>
-                            <p id="prof-program">—</p>
-                            <div style="margin-top:0.8rem;" id="prof-status-badge"></div>
-                        </div>
-                    </div>
-
-                    <div class="profile-grid">
-                        <div class="profile-field">
-                            <label><i class="fas fa-id-card" style="margin-right:0.4rem;"></i> Student ID</label>
-                            <span id="prof-id">—</span>
-                        </div>
-                        <div class="profile-field">
-                            <label><i class="fas fa-envelope" style="margin-right:0.4rem;"></i> Email Address</label>
-                            <span id="prof-email">—</span>
-                        </div>
-                        <div class="profile-field">
-                            <label><i class="fas fa-graduation-cap" style="margin-right:0.4rem;"></i> Program</label>
-                            <span id="prof-prog2">—</span>
-                        </div>
-                        <div class="profile-field">
-                            <label><i class="fas fa-check-circle" style="margin-right:0.4rem;"></i> Registration
-                                Status</label>
-                            <span id="prof-status2">—</span>
-                        </div>
-                        <div class="profile-field">
-                            <label><i class="fas fa-calendar" style="margin-right:0.4rem;"></i> Academic Year</label>
-                            <span>2025 – 2026</span>
-                        </div>
-                        <div class="profile-field">
-                            <label><i class="fas fa-globe" style="margin-right:0.4rem;"></i> Institution</label>
-                            <span>SLIBF — Hargeisa</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ═══ PANEL: COURSE FEE ══════════════════ -->
-                <div class="panel" id="panel-fee">
-                    <div class="page-header">
-                        <h2>Course Fee</h2>
-                        <p>Your payment summary and detailed breakdown.</p>
-                    </div>
-
-                    <div class="fee-summary">
-                        <div class="fee-box total">
-                            <div class="fee-amount" id="fee-total">—</div>
-                            <div class="fee-label">Total Fee</div>
-                        </div>
-                        <div class="fee-box paid">
-                            <div class="fee-amount" id="fee-paid">—</div>
-                            <div class="fee-label">Amount Paid</div>
-                        </div>
-                        <div class="fee-box balance">
-                            <div class="fee-amount" id="fee-balance2">—</div>
-                            <div class="fee-label">Remaining Balance</div>
-                        </div>
-                    </div>
-
-                    <div class="table-card">
-                        <div class="table-head">
-                            <h3>Payment History</h3>
-                        </div>
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Description</th>
-                                    <th>Amount</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="fee-tbody">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- ═══ PANEL: ATTENDANCE ══════════════════ -->
-                <div class="panel" id="panel-attendance">
-                    <div class="page-header">
-                        <h2>Attendance Record</h2>
-                        <p>Your class attendance overview and detailed log.</p>
-                    </div>
-
-                    <div class="attendance-overview">
-                        <div class="circle-progress">
-                            <svg viewBox="0 0 130 130" width="130" height="130">
-                                <circle class="circle-bg" cx="65" cy="65" r="55"></circle>
-                                <circle class="circle-fill" cx="65" cy="65" r="55" id="att-circle"
-                                    stroke-dasharray="345.58" stroke-dashoffset="345.58"></circle>
-                            </svg>
-                            <div class="circle-text">
-                                <span class="pct" id="att-pct">0%</span>
-                                <span class="lbl">Attendance</span>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:0.5rem;" id="att-summary-title">
-                                Attendance Summary</h3>
-                            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1rem;">
-                                <div>
-                                    <div style="font-size:1.5rem;font-weight:800;color:var(--success);"
-                                        id="att-present">0</div>
-                                    <div
-                                        style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:600;">
-                                        Present</div>
-                                </div>
-                                <div>
-                                    <div style="font-size:1.5rem;font-weight:800;color:var(--danger);" id="att-absent">0
-                                    </div>
-                                    <div
-                                        style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:600;">
-                                        Absent</div>
-                                </div>
-                                <div>
-                                    <div style="font-size:1.5rem;font-weight:800;color:var(--warning);" id="att-late">0
-                                    </div>
-                                    <div
-                                        style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:600;">
-                                        Late</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="table-card">
-                        <div class="table-head">
-                            <h3>Attendance Log</h3>
-                        </div>
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Subject</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="att-tbody"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- ═══ PANEL: NEWS ════════════════════════ -->
-                <div class="panel" id="panel-news">
-                    <div class="page-header">
-                        <h2>News & Announcements</h2>
-                        <p>Stay informed with the latest updates from SLIBF.</p>
-                    </div>
-                    <div id="news-container"
-                        style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.4rem;">
-                    </div>
-                </div>
-
-            </div><!-- /page-content -->
-        </div><!-- /main-content -->
-    </div><!-- /sys-layout -->
-
-    <div id="sys-toast" class="toast"></div>
-
-    <script src="js/system.js"></script>
-    <script>
-        (function () {
-            // ── Auth Guard ──────────────────────────
-            const session = Auth.requireRole('student');
-            if (!session) return;
-
-            // ── Populate sidebar user ───────────────
-            document.getElementById('sidebar-name').textContent = session.name.split(' ').slice(0, 2).join(' ');
-
-            // ── Date / Time ─────────────────────────
-            const now = new Date();
-            document.getElementById('topbar-date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-            initLiveTime();
-
-            // ── Conditional: Approved vs Pending ────
-            const isApproved = session.status === 'Approved';
-            if (!isApproved) {
-                document.getElementById('review-notice').style.display = 'flex';
-                document.getElementById('fee-card').querySelector('.stat-value').parentElement.classList.add('blur-overlay');
-                document.getElementById('attendance-card').classList.add('blur-overlay');
-                document.getElementById('nav-fee').style.pointerEvents = 'none';
-                document.getElementById('nav-fee').style.opacity = '0.4';
-                document.getElementById('nav-attendance').style.pointerEvents = 'none';
-                document.getElementById('nav-attendance').style.opacity = '0.4';
-            }
-
-            // ── Dashboard Cards ──────────────────────
-            document.getElementById('welcome-heading').textContent = `Welcome back, ${session.name.split(' ')[0]}!`;
-            document.getElementById('card-program-short').textContent = session.program ? session.program.split(' ').slice(0, 3).join(' ') + '…' : '—';
-            document.getElementById('card-status').innerHTML = statusBadge(session.status);
-
-            const balance = session.fee - session.paid;
-            document.getElementById('card-balance').textContent = '$' + balance.toLocaleString();
-            document.getElementById('card-attendance').textContent = '87.5%';
-
-            // ── Profile ──────────────────────────────
-            document.getElementById('prof-name').textContent = session.name;
-            document.getElementById('prof-program').textContent = session.program || '—';
-            document.getElementById('prof-id').textContent = session.id;
-            document.getElementById('prof-email').textContent = session.email;
-            document.getElementById('prof-prog2').textContent = session.program || '—';
-            document.getElementById('prof-status-badge').innerHTML = statusBadge(session.status);
-            document.getElementById('prof-status2').innerHTML = statusBadge(session.status);
-
-            // ── Fee ──────────────────────────────────
-            document.getElementById('fee-total').textContent = formatCurrency(session.fee);
-            document.getElementById('fee-paid').textContent = formatCurrency(session.paid);
-            document.getElementById('fee-balance2').textContent = formatCurrency(balance);
-
-            const feeTbody = document.getElementById('fee-tbody');
-            const feeRows = [
-                { desc: 'Semester 1 Tuition', amt: Math.round(session.fee * 0.5), date: '2025-09-01', status: 'Paid' },
-                { desc: 'Semester 2 Tuition', amt: Math.round(session.fee * 0.3), date: '2026-01-15', status: session.paid >= session.fee * 0.8 ? 'Paid' : 'Pending' },
-                { desc: 'Registration Fee', amt: Math.round(session.fee * 0.1), date: '2025-08-20', status: 'Paid' },
-                { desc: 'Library & Lab Fees', amt: Math.round(session.fee * 0.1), date: '2025-09-01', status: balance > 0 ? 'Unpaid' : 'Paid' },
-            ];
-            feeTbody.innerHTML = feeRows.map((r, i) => `
-        <tr>
-            <td>${i + 1}</td>
-            <td>${r.desc}</td>
-            <td>${formatCurrency(r.amt)}</td>
-            <td>${r.date}</td>
-            <td>${statusBadge(r.status)}</td>
-        </tr>
-    `).join('');
-
-            // ── Attendance ───────────────────────────
-            const att = DB.attendance;
-            const total = att.length;
-            const presentCount = att.filter(a => a.status === 'Present').length;
-            const absentCount = att.filter(a => a.status === 'Absent').length;
-            const lateCount = att.filter(a => a.status === 'Late').length;
-            const pct = Math.round((presentCount / total) * 100);
-
-            document.getElementById('att-pct').textContent = pct + '%';
-            document.getElementById('att-present').textContent = presentCount;
-            document.getElementById('att-absent').textContent = absentCount;
-            document.getElementById('att-late').textContent = lateCount;
-
-            // Animate circle
-            const circumference = 2 * Math.PI * 55;
-            const offset = circumference - (pct / 100) * circumference;
-            setTimeout(() => {
-                document.getElementById('att-circle').style.strokeDashoffset = offset;
-            }, 300);
-
-            // Attendance table
-            const attTbody = document.getElementById('att-tbody');
-            attTbody.innerHTML = att.map(a => `
-        <tr>
-            <td>${a.date}</td>
-            <td>${a.subject}</td>
-            <td>${statusBadge(a.status)}</td>
-        </tr>
-    `).join('');
-
-            // ── News ─────────────────────────────────
-            const newsContainer = document.getElementById('news-container');
-            newsContainer.innerHTML = DB.news.map(n => `
-        <div class="table-card" style="overflow:hidden;">
-            <div style="height:120px;background:linear-gradient(135deg,var(--primary-dark),var(--primary));display:flex;align-items:center;justify-content:center;">
-                <i class="fas fa-newspaper" style="font-size:2.5rem;color:rgba(255,255,255,0.3);"></i>
-            </div>
-            <div style="padding:1.4rem;">
-                <div style="font-size:0.75rem;color:var(--text-muted);font-weight:600;margin-bottom:0.5rem;"><i class="fas fa-calendar" style="margin-right:0.3rem;"></i>${n.date}</div>
-                <h3 style="font-size:1rem;font-weight:700;margin-bottom:0.6rem;">${n.title}</h3>
-                <p style="font-size:0.85rem;color:var(--text-muted);">${n.content}</p>
-            </div>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-brand"><i class="fas fa-graduation-cap"></i> SIBF PORTAL</div>
+        <div class="sidebar-profile">
+            <img id="sideProfilePic" src="https://ui-avatars.com/api/?name=Ardayga&background=random" onerror="this.src='https://ui-avatars.com/api/?name=User&background=random'">
+            <div id="sideStudentName" style="font-weight: 600; font-size: 14px; color: white; margin-top: 5px;">Ardayga</div>
         </div>
-    `).join('');
 
-            initSidebar();
-            initLiveTime();
-        })();
-    </script>
+        <div class="nav-item active" onclick="showSection('overview', this)"><i class="fas fa-th-large"></i> Dashboard</div>
+        <div class="nav-item" onclick="showSection('courses', this)"><i class="fas fa-book-open"></i> My Courses</div>
+        <div class="nav-item" onclick="showSection('attendance', this)"><i class="fas fa-calendar-check"></i> Attendance</div>
+        <div class="nav-item" onclick="showSection('grades', this)"><i class="fas fa-file-invoice"></i> My Results</div>
+        <div class="nav-item" onclick="showSection('payments', this)"><i class="fas fa-money-bill-wave"></i> Payments</div>
+        <div class="nav-item" onclick="showSection('feeScheduleSec', this)"><i class="fas fa-file-invoice-dollar"></i> Fee Schedule</div>
+        <div class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</div>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <div class="header-text">
+                <h1 id="welcomeText">Soo dhowaw...</h1>
+                <p id="studentIDDisplay">Student ID: ...</p>
+            </div>
+        </header>
+
+        <section id="overview" class="content-section active">
+            <div class="stats-grid">
+                <div class="stat-card gpa-card-highlight">
+                    <div class="icon-box"><i class="fas fa-chart-line"></i></div>
+                    <div class="stat-info">
+                        <h3 id="gpaSummary">0.00</h3>
+                        <p style="font-size:12px; color:rgba(255,255,255,0.7)">Cumulative GPA</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon-box theme-green"><i class="fas fa-user-check"></i></div>
+                    <div class="stat-info"><h3 id="attSummary">0%</h3><p style="font-size:12px; color:var(--text-muted)">Attendance</p></div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon-box theme-blue"><i class="fas fa-wallet"></i></div>
+                    <div class="stat-info"><h3 id="balanceSummary">$0</h3><p style="font-size:12px; color:var(--text-muted)">Balance</p></div>
+                </div>
+                <div class="stat-card">
+                    <div class="icon-box theme-dark"><i class="fas fa-university"></i></div>
+                    <div class="stat-info"><h3 id="courseCountDisplay">0</h3><p style="font-size:12px; color:var(--text-muted)">Courses</p></div>
+                </div>
+            </div>
+
+            <div class="card-container">
+                <h2><i class="fas fa-user-circle"></i> Personal Profile</h2>
+                <div style="display: flex; gap: 30px; align-items: flex-start;">
+                    <img id="mainProfilePic" src="https://ui-avatars.com/api/?name=Ardayga&background=random" class="profile-card-img">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1;">
+                        <div><span style="color:var(--text-muted); font-size:13px;">Faculty:</span> <p id="displayFaculty" style="font-weight:600; color:var(--primary)">---</p></div>
+                        <div><span style="color:var(--text-muted); font-size:13px;">Academic Status:</span> <p id="academicStatus" style="color:#22c55e; font-weight:600">Active Student</p></div>
+                        <div><span style="color:var(--text-muted); font-size:13px;">Institution:</span> <p style="font-weight:600">SIBF Institute</p></div>
+                    </div>
+                </div>
+                
+                <div class="registration-info">
+                    <h4 style="margin-bottom:15px; color:var(--primary)">Registered Courses (Overview)</h4>
+                    <table>
+                        <thead><tr><th>Code</th><th>Course Title</th><th>Cr.Hrs</th></tr></thead>
+                        <tbody id="overviewCoursesBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="courses" class="content-section">
+            <div class="card-container">
+                <h2><i class="fas fa-book"></i> My Registered Courses</h2>
+                <table>
+                    <thead><tr><th>Code</th><th>Title</th><th>Instructor</th><th>Credit Hours</th></tr></thead>
+                    <tbody id="coursesTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="attendance" class="content-section">
+            <div class="card-container">
+                <h2><i class="fas fa-calendar-check"></i> Attendance Record</h2>
+                <table>
+                    <thead><tr><th>Date</th><th>Subject</th><th>Status</th></tr></thead>
+                    <tbody id="attendanceTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="grades" class="content-section">
+            <div class="card-container">
+                <h2><i class="fas fa-file-invoice"></i> My Exam Results</h2>
+                <table>
+                    <thead><tr><th>Maadada</th><th>Taariikhda</th><th>Dhibcaha</th><th>Result</th></tr></thead>
+                    <tbody id="gradesTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="payments" class="content-section">
+            <div class="stats-grid">
+                <div class="stat-card" style="border-left: 5px solid #004d26;"><div class="stat-info"><p style="font-size:13px; color:var(--text-muted)">Total Fees</p><h2 id="totalFees">$0.00</h2></div></div>
+                <div class="stat-card" style="border-left: 5px solid #22c55e;"><div class="stat-info"><p style="font-size:13px; color:var(--text-muted)">Total Paid</p><h2 id="totalPaid" style="color:#22c55e;">$0.00</h2></div></div>
+                <div class="stat-card" style="border-left: 5px solid #ef4444;"><div class="stat-info"><p style="font-size:13px; color:var(--text-muted)">Remaining Balance</p><h2 id="totalBalance" style="color:#ef4444;">$0.00</h2></div></div>
+            </div>
+
+            <div class="card-container">
+                <h2><i class="fas fa-history"></i> Payment History</h2>
+                <table>
+                    <thead><tr><th>Date</th><th>Description</th><th>Receipt No.</th><th>Amount</th><th>Status</th></tr></thead>
+                    <tbody id="paymentsTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="feeScheduleSec" class="content-section">
+            <div class="card-container">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                    <h2><i class="fas fa-file-invoice-dollar"></i> Course Fee Schedule</h2>
+                    <span style="background:var(--accent); color:white; padding:5px 15px; border-radius:20px; font-size:12px; font-weight:700;">Admin Assigned</span>
+                </div>
+                <p style="color:var(--text-muted); margin-bottom:20px; font-size:14px;">Halkan ka eeg maadooyinka aad iska diwaangelisay iyo lacagta maado kasta lagaa rabo.</p>
+                
+                <table class="fee-table">
+                    <thead>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Credit Hours</th>
+                            <th>Course Fee</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feeScheduleTableBody">
+                        </tbody>
+                    <tfoot>
+                        <tr class="total-row">
+                            <td colspan="2" style="text-align:right">Total Course Fees:</td>
+                            <td id="totalCourseFeesDisplay" style="color:var(--primary)">$0.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+    </main>
+
+<script>
+    /**
+     * 🟢 PROFESSIONAL API & REAL-TIME INTEGRATION
+     */
+    const API_CONFIG = {
+        ENABLED: false, 
+        BASE_URL: "https://api.sibf-portal.so/v1" 
+    };
+
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    let studentRecords = JSON.parse(localStorage.getItem("studentRecords")) || {};
+
+    window.onload = async function() {
+        if (!currentUser) { 
+            window.location.href = "../login/index.html"; 
+            return; 
+        }
+
+        // Profile UI Fix (Haddii sawir la waayo)
+        const avatarUrl = `https://ui-avatars.com/api/?name=${currentUser.name.replace(/ /g, '+')}&background=random&color=fff`;
+        document.getElementById("sideProfilePic").src = currentUser.photo || avatarUrl;
+        document.getElementById("mainProfilePic").src = currentUser.photo || avatarUrl;
+
+        document.getElementById("welcomeText").innerText = `Ku soo dhowaw, ${currentUser.name}`;
+        document.getElementById("sideStudentName").innerText = currentUser.name;
+        document.getElementById("studentIDDisplay").innerText = `Student ID: ${currentUser.id}`;
+        
+        await refreshData();
+    };
+
+    async function refreshData() {
+        if (API_CONFIG.ENABLED) {
+            try {
+                const response = await fetch(`${API_CONFIG.BASE_URL}/student/${currentUser.id}`);
+                if (response.ok) {
+                    const freshData = await response.json();
+                    studentRecords[currentUser.id] = freshData;
+                    localStorage.setItem("studentRecords", JSON.stringify(studentRecords));
+                }
+            } catch (err) { console.warn("API Error"); }
+        }
+        updateUI();
+    }
+
+    window.addEventListener('storage', (event) => {
+        if (event.key === 'studentRecords') {
+            studentRecords = JSON.parse(event.newValue);
+            updateUI();
+        }
+    });
+
+    function updateUI() {
+        loadMyAttendance();
+        loadMyExamResults();
+        loadMyPayments();
+        loadAssignedClasses();
+        loadFeeSchedule(); // 🟢 Custom Function
+    }
+
+    // 🟢 NEW: Load Fee Schedule (Course Fees from Admin)
+    function loadFeeSchedule() {
+        const myData = studentRecords[currentUser.id];
+        const fsBody = document.getElementById("feeScheduleTableBody");
+        let totalAssigned = 0;
+
+        if (myData && myData.feeSchedule) {
+            fsBody.innerHTML = myData.feeSchedule.map(item => {
+                totalAssigned += parseFloat(item.amount || 0);
+                return `<tr>
+                    <td><b>${item.courseName}</b></td>
+                    <td>${item.crh || '-'}</td>
+                    <td style="color:var(--primary); font-weight:700">$${parseFloat(item.amount).toFixed(2)}</td>
+                </tr>`;
+            }).join('');
+        } else {
+            fsBody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:30px; color:var(--text-muted)">Weli ma jiro jadwal lacag bixin oo Admin-ku kuu soo diray.</td></tr>`;
+        }
+
+        document.getElementById("totalCourseFeesDisplay").innerText = `$${totalAssigned.toFixed(2)}`;
+        // Update stats card for Total Fees automatically
+        document.getElementById("totalFees").innerText = `$${totalAssigned.toFixed(2)}`;
+        loadMyPayments(totalAssigned); // Recalculate balance with new total
+    }
+
+    function loadMyAttendance() {
+        const myData = studentRecords[currentUser.id];
+        const aBody = document.getElementById("attendanceTableBody");
+        if (!myData || !myData.attendanceDetails) return;
+        
+        let presentCount = 0;
+        aBody.innerHTML = myData.attendanceDetails.map(a => {
+            if(a.status === "Present") presentCount++;
+            return `<tr><td>${a.date}</td><td><b>${a.subject}</b></td><td style="color:${a.status === 'Present' ? '#22c55e' : '#ef4444'}; font-weight:700">${a.status}</td></tr>`;
+        }).reverse().join('');
+        
+        document.getElementById("attSummary").innerText = Math.round((presentCount / (myData.attendanceDetails.length || 1)) * 100) + "%";
+    }
+
+    function loadMyExamResults() {
+        const myData = studentRecords[currentUser.id];
+        const gBody = document.getElementById("gradesTableBody");
+        if (!myData || !myData.grades) return;
+
+        let totalPoints = 0;
+        gBody.innerHTML = myData.grades.map(g => {
+            const score = (parseInt(g.mid) || 0) + (parseInt(g.final) || 0);
+            totalPoints += score >= 50 ? 3 : 0;
+            return `<tr><td><b>${g.subject}</b></td><td>${g.date || '-'}</td><td><b>${score}</b></td><td><span class="badge ${score >= 50 ? 'bg-pass' : 'bg-fail'}">${score >= 50 ? 'PASS' : 'FAIL'}</span></td></tr>`;
+        }).reverse().join('');
+        document.getElementById("gpaSummary").innerText = (totalPoints / (myData.grades.length || 1)).toFixed(2);
+    }
+
+    function loadMyPayments(assignedTotal = 0) {
+        const myData = studentRecords[currentUser.id];
+        const pBody = document.getElementById("paymentsTableBody");
+        let paid = 0;
+
+        if (myData && myData.payments) {
+            pBody.innerHTML = myData.payments.map(p => {
+                paid += parseFloat(p.amount || 0);
+                return `<tr><td>${p.date}</td><td><b>${p.desc}</b></td><td>#${p.receipt}</td><td>$${p.amount}</td><td><span class="badge bg-pass">Paid</span></td></tr>`;
+            }).join('');
+        }
+        
+        const total = assignedTotal > 0 ? assignedTotal : 600; 
+        document.getElementById("totalPaid").innerText = `$${paid.toFixed(2)}`;
+        document.getElementById("totalBalance").innerText = `$${(total - paid).toFixed(2)}`;
+        document.getElementById("balanceSummary").innerText = `$${(total - paid).toFixed(0)}`;
+    }
+
+    function loadAssignedClasses() {
+        const globalCourses = JSON.parse(localStorage.getItem("globalCourses")) || [];
+        document.getElementById("overviewCoursesBody").innerHTML = globalCourses.map(d => `<tr><td>${d.code}</td><td><b>${d.name}</b></td><td>${d.crh}</td></tr>`).join('');
+        document.getElementById("coursesTableBody").innerHTML = globalCourses.map(d => `<tr><td>${d.code}</td><td><b>${d.name}</b></td><td>${d.instructor}</td><td>${d.crh}</td></tr>`).join('');
+        document.getElementById("courseCountDisplay").innerText = globalCourses.length;
+    }
+
+    function showSection(id, element) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        document.getElementById(id).classList.add('active'); 
+        element.classList.add('active');
+    }
+
+    function logout() { 
+        if(confirm("Ma hubtaa inaad baxayso?")) { 
+            localStorage.removeItem("currentUser"); 
+            window.location.href = "../login/index.html"; 
+        } 
+    }
+</script>
 </body>
-
 </html>

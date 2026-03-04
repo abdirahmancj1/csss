@@ -9,6 +9,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* ─── Admin-specific extras ─── */
+        /* Action Buttons */
+        .btn-action {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .btn-edit {
+            background: #3b82f6;
+        }
+
+        .btn-edit:hover {
+            background: #2563eb;
+        }
+
+        .btn-reset {
+            background: #f59e0b;
+        }
+
+        .btn-reset:hover {
+            background: #d97706;
+        }
+
+        .btn-delete {
+            background: #ef4444;
+        }
+
+        .btn-delete:hover {
+            background: #dc2626;
+        }
+
         .multi-select {
             width: 100%;
             min-height: 110px;
@@ -760,8 +800,24 @@
         // ────────────────────────────────────────────────
         //  DASHBOARD
         // ────────────────────────────────────────────────
+        function getRegistrarStudents() {
+            const raw = localStorage.getItem('slibf_apps');
+            if (!raw) return [];
+            return JSON.parse(raw).filter(a => a.status === 'Approved').map(a => ({
+                id: 'STU-' + (a.id.split('-')[1] || Math.floor(1000 + Math.random() * 9000)),
+                name: a.name,
+                email: a.email || (a.name.toLowerCase().replace(/\s/g, '') + '@slibf.edu'),
+                program: a.program,
+                status: 'Approved',
+                fee: 0,
+                paid: 0,
+                isRegistrar: true
+            }));
+        }
+
         function renderDashboardTables() {
-            document.getElementById('dash-teachers-tbody').innerHTML = DB.teachers.slice(0, 3).map(t => `
+            const currentTeachers = JSON.parse(localStorage.getItem('slibf_teachers')) || DB.teachers;
+            document.getElementById('dash-teachers-tbody').innerHTML = currentTeachers.slice(0, 3).map(t => `
         <tr>
             <td><strong>${t.name}</strong></td>
             <td>${t.courseIds.length} course${t.courseIds.length !== 1 ? 's' : ''}</td>
@@ -769,13 +825,24 @@
         </tr>
     `).join('');
 
-            document.getElementById('dash-students-tbody').innerHTML = DB.students.slice(0, 3).map(s => `
+            const currentStudents = JSON.parse(localStorage.getItem('slibf_students')) || DB.students;
+            const allStudents = [...getRegistrarStudents(), ...currentStudents];
+
+            document.getElementById('dash-students-tbody').innerHTML = allStudents.slice(0, 3).map(s => `
         <tr>
-            <td><strong>${s.name}</strong></td>
+            <td><strong>${s.name}</strong>
+            ${s.isRegistrar ? '<span style="font-size:10px; font-weight:700; background:#064e3b; color:white; padding:2px 6px; border-radius:10px; margin-left:6px;">REGISTRAR</span>' : ''}</td>
             <td>${s.program.split(' ').slice(0, 3).join(' ')}…</td>
             <td>${statusBadge(s.status)}</td>
         </tr>
     `).join('');
+
+            // Update the stats cards dynamically
+            const statValues = document.querySelectorAll('.stat-value');
+            if (statValues.length >= 2) {
+                statValues[0].textContent = currentTeachers.length;
+                statValues[1].textContent = allStudents.length;
+            }
         }
 
         // ────────────────────────────────────────────────
@@ -847,17 +914,24 @@
                 ${statusBadge(t.status)}
             </td>
             <td style="display:flex;gap:0.4rem;">
-                <button class="btn btn-outline btn-sm btn-icon" title="Edit"     onclick="editTeacher('${t.id}')"><i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  btn-sm btn-icon" title="Delete"   onclick="deleteTeacher('${t.id}')"><i class="fas fa-trash"></i></button>
-                <button class="btn btn-ghost   btn-sm btn-icon" title="Reset PW" onclick="showToast('Password reset email sent to ${t.email}','success')"><i class="fas fa-key"></i></button>
+                <button class="btn-action btn-edit" title="Edit Teacher" onclick="editTeacher('${t.id}')">
+                    <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn-action btn-reset" title="Reset PW" onclick="resetTeacherPassword('${t.name}')">
+                    <i class="fas fa-key"></i>
+                </button>
+                <button class="btn-action btn-delete" title="Delete Teacher" onclick="deleteTeacher('${t.id}')">
+                    <i class="fas fa-trash"></i>
+                </button>
             </td>
         </tr>
     `;
         }
 
         function renderTeachersTable(filter = '') {
+            const currentTeachers = JSON.parse(localStorage.getItem('slibf_teachers')) || DB.teachers;
             const tbody = document.getElementById('tch-tbody');
-            const items = filter ? DB.teachers.filter(t => t.status === filter) : DB.teachers;
+            const items = filter ? currentTeachers.filter(t => t.status === filter) : currentTeachers;
             tbody.innerHTML = items.length ? items.map(teacherRow).join('') :
                 `<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--text-muted);"><i class="fas fa-search" style="margin-right:0.4rem;"></i>No teachers found.</td></tr>`;
         }
@@ -871,7 +945,8 @@
         };
 
         window.editTeacher = function (id) {
-            const t = DB.teachers.find(x => x.id === id);
+            const currentTeachers = JSON.parse(localStorage.getItem('slibf_teachers')) || DB.teachers;
+            const t = currentTeachers.find(x => x.id === id);
             if (!t) return;
             document.getElementById('tch-editing-id').value = id;
             document.getElementById('tch-name').value = t.name;
@@ -908,14 +983,17 @@
             if (!valid) return;
 
             const courseIds = [...document.querySelectorAll('#tch-courses option:checked')].map(o => o.value);
+            let currentTeachers = JSON.parse(localStorage.getItem('slibf_teachers')) || DB.teachers;
 
             if (editId) {
-                const t = DB.teachers.find(x => x.id === editId);
+                const t = currentTeachers.find(x => x.id === editId);
                 if (t) { t.name = name; t.email = email; t.phone = phone; t.username = username; t.status = status; t.courseIds = courseIds; }
             } else {
-                const newId = 'TCH' + String(DB.teachers.length + 1).padStart(3, '0');
-                DB.teachers.push({ id: newId, name, email, phone, courseIds, status, username });
+                const newId = 'TCH' + String(currentTeachers.length + 1).padStart(3, '0');
+                currentTeachers.push({ id: newId, name, email, phone, courseIds, status, username });
             }
+
+            localStorage.setItem('slibf_teachers', JSON.stringify(currentTeachers));
 
             renderTeachersTable(document.getElementById('tch-filter').value);
             renderDashboardTables();
@@ -924,13 +1002,20 @@
         };
 
         window.deleteTeacher = function (id) {
-            confirmAction(`Delete teacher record "${DB.teachers.find(t => t.id === id)?.name}"? This cannot be undone.`, () => {
+            let currentTeachers = JSON.parse(localStorage.getItem('slibf_teachers')) || DB.teachers;
+            confirmAction(`Delete teacher record "${currentTeachers.find(t => t.id === id)?.name}"? This cannot be undone.`, () => {
                 // TODO: DELETE /api/teachers/{id}
-                DB.teachers = DB.teachers.filter(t => t.id !== id);
+                currentTeachers = currentTeachers.filter(t => t.id !== id);
+                localStorage.setItem('slibf_teachers', JSON.stringify(currentTeachers));
                 renderTeachersTable(document.getElementById('tch-filter').value);
                 renderDashboardTables();
                 showToast('Teacher deleted.', 'danger');
             });
+        };
+
+        window.resetTeacherPassword = function (name) {
+            const newPass = 'TCH@' + Math.floor(1000 + Math.random() * 9000);
+            alert('Password reset for teacher: ' + name + '\\n\\nNew Temporary Password: ' + newPass + '\\n\\nPlease share this securely with the teacher.');
         };
 
         // ────────────────────────────────────────────────
@@ -938,24 +1023,35 @@
         // ────────────────────────────────────────────────
         function studentRow(s) {
             return `
-        <tr id="stu-row-${s.id}">
+        <tr id="stu-row-${s.id}" ${s.isRegistrar ? 'style="background:#f0fdf4;"' : ''}>
             <td><span class="badge badge-gray">${s.id}</span></td>
-            <td><strong>${s.name}</strong></td>
+            <td>
+                <strong>${s.name}</strong>
+                ${s.isRegistrar ? '<span style="font-size:10px; font-weight:700; background:#064e3b; color:white; padding:2px 6px; border-radius:10px; margin-left:6px;">REGISTRAR</span>' : ''}
+            </td>
             <td>${s.email}</td>
             <td>${s.program}</td>
             <td>${statusBadge(s.status)}</td>
             <td style="display:flex;gap:0.4rem;">
-                <button class="btn btn-outline btn-sm btn-icon" title="Edit"     onclick="editStudent('${s.id}')"><i class="fas fa-pen"></i></button>
-                <button class="btn btn-danger  btn-sm btn-icon" title="Delete"   onclick="deleteStudent('${s.id}')"><i class="fas fa-trash"></i></button>
-                <button class="btn btn-ghost   btn-sm btn-icon" title="Reset PW" onclick="showToast('Password reset for ${s.name.split(' ')[0]}.','success')"><i class="fas fa-key"></i></button>
+                <button class="btn-action btn-edit" title="Edit Student" onclick="editStudent('${s.id}')" ${s.isRegistrar ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+                    <i class="fas fa-pen"></i>
+                </button>
+                <button class="btn-action btn-reset" title="Reset PW" onclick="showToast('Password reset for ${s.name.split(' ')[0]}.','success')">
+                    <i class="fas fa-key"></i>
+                </button>
+                <button class="btn-action btn-delete" title="Delete Student" onclick="deleteStudent('${s.id}')" ${s.isRegistrar ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+                    <i class="fas fa-trash"></i>
+                </button>
             </td>
         </tr>
     `;
         }
 
         function renderStudentsTable(filter = '') {
+            const currentStudents = JSON.parse(localStorage.getItem('slibf_students')) || DB.students;
+            const allStudents = [...getRegistrarStudents(), ...currentStudents];
             const tbody = document.getElementById('stu-tbody');
-            const items = filter ? DB.students.filter(s => s.status === filter) : DB.students;
+            const items = filter ? allStudents.filter(s => s.status === filter) : allStudents;
             tbody.innerHTML = items.length ? items.map(studentRow).join('') :
                 `<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--text-muted);">No students found.</td></tr>`;
         }
@@ -968,7 +1064,8 @@
         };
 
         window.editStudent = function (id) {
-            const s = DB.students.find(x => x.id === id);
+            const currentStudents = JSON.parse(localStorage.getItem('slibf_students')) || DB.students;
+            const s = currentStudents.find(x => x.id === id);
             if (!s) return;
             document.getElementById('stu-editing-id').value = id;
             document.getElementById('stu-name').value = s.name;
@@ -993,12 +1090,16 @@
 
             if (!name || !email || !stuId) { showToast('Please fill all required fields.', 'warning'); return; }
 
+            let currentStudents = JSON.parse(localStorage.getItem('slibf_students')) || DB.students;
+
             if (editId) {
-                const s = DB.students.find(x => x.id === editId);
+                const s = currentStudents.find(x => x.id === editId);
                 if (s) { s.name = name; s.email = email; s.program = program; s.status = status; s.fee = fee; }
             } else {
-                DB.students.push({ id: stuId, name, email, program, status, fee, paid: 0 });
+                currentStudents.push({ id: stuId, name, email, program, status, fee, paid: 0 });
             }
+
+            localStorage.setItem('slibf_students', JSON.stringify(currentStudents));
 
             renderStudentsTable(document.getElementById('stu-status-filter').value);
             renderDashboardTables();
@@ -1007,9 +1108,11 @@
         };
 
         window.deleteStudent = function (id) {
-            confirmAction(`Delete student "${DB.students.find(s => s.id === id)?.name}"? This cannot be undone.`, () => {
+            let currentStudents = JSON.parse(localStorage.getItem('slibf_students')) || DB.students;
+            confirmAction(`Delete student "${currentStudents.find(s => s.id === id)?.name}"? This cannot be undone.`, () => {
                 // TODO: DELETE /api/students/{id}
-                DB.students = DB.students.filter(s => s.id !== id);
+                currentStudents = currentStudents.filter(s => s.id !== id);
+                localStorage.setItem('slibf_students', JSON.stringify(currentStudents));
                 renderStudentsTable(document.getElementById('stu-status-filter').value);
                 renderDashboardTables();
                 showToast('Student deleted.', 'danger');
@@ -1028,12 +1131,15 @@
             <td><code style="background:var(--surface);padding:0.2rem 0.5rem;border-radius:5px;font-size:0.82rem;">${r.username}</code></td>
             <td>${statusBadge(r.status)}</td>
             <td style="display:flex;gap:0.4rem;">
-                <button class="btn btn-outline btn-sm btn-icon" title="Edit"       onclick="editRegistrar('${r.id}')"><i class="fas fa-pen"></i></button>
-                <button class="btn ${r.status === 'Active' ? 'btn-danger' : 'btn-success'} btn-sm" onclick="toggleRegistrar('${r.id}')">
-                    <i class="fas fa-${r.status === 'Active' ? 'ban' : 'check'}"></i>
-                    ${r.status === 'Active' ? 'Deactivate' : 'Activate'}
+                <button class="btn-action btn-edit" title="Edit Registrar" onclick="editRegistrar('${r.id}')">
+                    <i class="fas fa-pen"></i>
                 </button>
-                <button class="btn btn-ghost btn-sm btn-icon" title="Reset PW" onclick="showToast('Password reset for ${r.username}.','success')"><i class="fas fa-key"></i></button>
+                <button class="btn-action ${r.status === 'Active' ? 'btn-delete' : 'btn-edit'}" title="${r.status === 'Active' ? 'Deactivate' : 'Activate'}" onclick="toggleRegistrar('${r.id}')">
+                    <i class="fas fa-${r.status === 'Active' ? 'ban' : 'check'}"></i>
+                </button>
+                <button class="btn-action btn-reset" title="Reset PW" onclick="showToast('Password reset for ${r.username}.','success')">
+                    <i class="fas fa-key"></i>
+                </button>
             </td>
         </tr>
     `;
