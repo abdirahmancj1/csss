@@ -161,7 +161,10 @@
     <!-- Navigation -->
     <nav>
         <div class="container nav-container">
-            <a href="index.html" class="logo">SLIBF</a>
+            <a href="index.html" class="logo">
+                <img src="images/logo institute.jpeg" alt="SLIBF Logo">
+                SLIBF
+            </a>
             <div class="hamburger"><span></span><span></span><span></span></div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -200,18 +203,24 @@
         </div>
     </header>
 
-    <!-- Featured Programs Section - Detailed with Images -->
-    <section id="featured">
+
+
+
+
+    <!-- Official Programs Table -->
+    <section id="official-programs">
         <div class="container">
             <div class="section-title">
-                <h2>Featured Programs</h2>
+                <h2>Our Academic & Professional Programs</h2>
                 <span></span>
                 <p
                     style="margin-top: 1.5rem; color: var(--text-muted); max-width: 700px; margin-left: auto; margin-right: auto;">
-                    Our flagship programs are designed for professionals and graduates seeking world-class education in
-                    finance and banking.</p>
+                    Explore our comprehensive 2026 fee schedule and program offerings. All amounts are in US Dollars
+                    (USD).
+                </p>
             </div>
 
+<<<<<<< HEAD
             <div class="program-feature-grid">
 
                 <!-- Card 1 -->
@@ -447,6 +456,610 @@
                         <tr><td class="col-no">26.</td><td class="col-name">Certified Shari&apos;ah Expert (CSE)</td><td>AAOIFI</td><td>AR</td><td>$20</td><td>$1,000</td><td>$100</td><td>0</td><td class="col-total">$1,120</td></tr>
                     </tbody>
                 </table>
+=======
+            <div class="search-wrapper reveal">
+                <input type="text" id="programSearch" placeholder="Search by name, ID, or awarding body...">
+            </div>
+
+            <div class="program-table-card reveal">
+                <div style="overflow-x: auto;">
+                    <table class="program-table" style="min-width: 1000px; white-space: nowrap;">
+                        <thead>
+                            <tr>
+                                <th width="3%">No</th>
+                                <th width="28%">Program Name</th>
+                                <th>Awarding Body</th>
+                                <th>Language</th>
+                                <th>Reg. Fee</th>
+                                <th>Program Fee</th>
+                                <th>Book Fee</th>
+                                <th>Cert. Fee</th>
+                                <th>Total Payable</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><strong>Certified Islamic Banking Expert (CIBE)</strong></td>
+                                <td>SLIBF</td>
+                                <td><span class="id-badge">EN/AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$25</td>
+                                <td>$50</td>
+                                <td style="color:var(--primary-color);"><strong>$345</strong></td>
+                                <td><button onclick="applyForProgram('Certified Islamic Banking Expert (CIBE)')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><strong>Certified Islamic Insurance Expert (CIIE)</strong></td>
+                                <td>SLIBF</td>
+                                <td><span class="id-badge">EN/AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$25</td>
+                                <td>$50</td>
+                                <td style="color:var(--primary-color);"><strong>$345</strong></td>
+                                <td><button onclick="applyForProgram('Certified Islamic Insurance Expert (CIIE)')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><strong>Certified Public Finance Expert (CPFE)</strong></td>
+                                <td>SLIBF</td>
+                                <td><span class="id-badge">EN/AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$25</td>
+                                <td>$50</td>
+                                <td style="color:var(--primary-color);"><strong>$345</strong></td>
+                                <td><button onclick="applyForProgram('Certified Public Finance Expert (CPFE)')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><strong>Certified Islamic Banker (CIB)</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">EN/AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$10</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$280</strong></td>
+                                <td><button onclick="applyForProgram('Certified Islamic Banker (CIB)')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><strong>Certified Islamic Bank Manager (CIBM)</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$10</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$280</strong></td>
+                                <td><button onclick="applyForProgram('Certified Islamic Bank Manager (CIBM)')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><strong>Certified Islamic Specialist in Capital Markets</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">EN/AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$10</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$280</strong></td>
+                                <td><button onclick="applyForProgram('Certified Islamic Specialist in Capital Markets')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td><strong>Certified Islamic Specialist in Trade Finance</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">EN/AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$10</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$280</strong></td>
+                                <td><button onclick="applyForProgram('Certified Islamic Specialist in Trade Finance')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td><strong>Certified Islamic Specialist in Takaful</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$10</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$280</strong></td>
+                                <td><button onclick="applyForProgram('Certified Islamic Specialist in Takaful')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td><strong>Certified Islamic Specialist in Accounting</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$10</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$280</strong></td>
+                                <td><button onclick="applyForProgram('Certified Islamic Specialist in Accounting')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td><strong>Certified Islamic Specialist in Governance and Compliance</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$10</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$280</strong></td>
+                                <td><button
+                                        onclick="applyForProgram('Certified Islamic Specialist in Governance and Compliance')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td><strong>Certified Islamic Specialist in Risk Management</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">EN/AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$10</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$280</strong></td>
+                                <td><button onclick="applyForProgram('Certified Islamic Specialist in Risk Management')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td><strong>Certified Islamic Specialist in Advanced Sharia Auditing</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$10</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$280</strong></td>
+                                <td><button
+                                        onclick="applyForProgram('Certified Islamic Specialist in Advanced Sharia Auditing')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td><strong>Certified Islamic Specialist in Product Development</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$10</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$280</strong></td>
+                                <td><button
+                                        onclick="applyForProgram('Certified Islamic Specialist in Product Development')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td><strong>Certified Specialist in Islamic Sustainability Management</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$250</td>
+                                <td>$10</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$280</strong></td>
+                                <td><button
+                                        onclick="applyForProgram('Certified Specialist in Islamic Sustainability Management')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td><strong>Certificate of Proficiency in Financial Accounting Standards
+                                        (CPFAS)</strong></td>
+                                <td>AAOIFI</td>
+                                <td><span class="id-badge">EN/AR</span></td>
+                                <td>$20</td>
+                                <td>$500</td>
+                                <td>$25</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$545</strong></td>
+                                <td><button
+                                        onclick="applyForProgram('Certificate of Proficiency in Financial Accounting Standards (CPFAS)')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td><strong>Certificate of Proficiency in Shari'ah Standards (CPSS)</strong></td>
+                                <td>AAOIFI</td>
+                                <td><span class="id-badge">EN/AR</span></td>
+                                <td>$20</td>
+                                <td>$500</td>
+                                <td>$25</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$545</strong></td>
+                                <td><button
+                                        onclick="applyForProgram('Certificate of Proficiency in Shari\'ah Standards (CPSS)')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>17</td>
+                                <td><strong>Certificate of Proficiency in Audit, Assurance, Governance & Ethics</strong>
+                                </td>
+                                <td>AAOIFI</td>
+                                <td><span class="id-badge">EN/AR</span></td>
+                                <td>$20</td>
+                                <td>$500</td>
+                                <td>$25</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$545</strong></td>
+                                <td><button
+                                        onclick="applyForProgram('Certificate of Proficiency in Audit, Assurance, Governance & Ethics')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>18</td>
+                                <td><strong>Professional Advanced Diploma in Islamic Finance</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$500</td>
+                                <td>$30</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$550</strong></td>
+                                <td><button
+                                        onclick="applyForProgram('Professional Advanced Diploma in Islamic Finance')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>19</td>
+                                <td><strong>Professional Diploma in Accounting</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$500</td>
+                                <td>$30</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$550</strong></td>
+                                <td><button onclick="applyForProgram('Professional Diploma in Accounting')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>20</td>
+                                <td><strong>Professional Diploma in Risk Management</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$500</td>
+                                <td>$30</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$550</strong></td>
+                                <td><button onclick="applyForProgram('Professional Diploma in Risk Management')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>21</td>
+                                <td><strong>Professional Diploma in Shari'ah Auditing</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$500</td>
+                                <td>$30</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$550</strong></td>
+                                <td><button onclick="applyForProgram('Professional Diploma in Shari\'ah Auditing')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>22</td>
+                                <td><strong>Professional Diploma in Takaful Insurance</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$500</td>
+                                <td>$30</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$550</strong></td>
+                                <td><button onclick="applyForProgram('Professional Diploma in Takaful Insurance')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>23</td>
+                                <td><strong>Executive Professional Master in Islamic Finance</strong></td>
+                                <td>CIBAFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$800</td>
+                                <td>$50</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$870</strong></td>
+                                <td><button
+                                        onclick="applyForProgram('Executive Professional Master in Islamic Finance')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>24</td>
+                                <td><strong>Certified Shari'ah Auditor and Adviser (CSAA)</strong></td>
+                                <td>AAOIFI</td>
+                                <td><span class="id-badge">EN/AR</span></td>
+                                <td>$20</td>
+                                <td>$800</td>
+                                <td>$50</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$870</strong></td>
+                                <td><button onclick="applyForProgram('Certified Shari\'ah Auditor and Adviser (CSAA)')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>25</td>
+                                <td><strong>Certified Islamic Professional Accountant (CIPA)</strong></td>
+                                <td>AAOIFI</td>
+                                <td><span class="id-badge">EN/AR</span></td>
+                                <td>$20</td>
+                                <td>$1000</td>
+                                <td>$75</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$1095</strong></td>
+                                <td><button
+                                        onclick="applyForProgram('Certified Islamic Professional Accountant (CIPA)')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                            <tr>
+                                <td>26</td>
+                                <td><strong>Certified Shari'ah Expert (CSE)</strong></td>
+                                <td>AAOIFI</td>
+                                <td><span class="id-badge">AR</span></td>
+                                <td>$20</td>
+                                <td>$1000</td>
+                                <td>$100</td>
+                                <td>$0</td>
+                                <td style="color:var(--primary-color);"><strong>$1120</strong></td>
+                                <td><button onclick="applyForProgram('Certified Shari\'ah Expert (CSE)')"
+                                        class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;"><i
+                                            class="fas fa-edit"></i> Apply</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section id="registration-form-section" style="background-color: #f8fcf9;">
+        <div class="container">
+            <div class="section-title">
+                <h2>SLIBF Programmes Registration Form</h2>
+                <span></span>
+            </div>
+
+            <div class="card reveal" style="max-width: 800px; margin: 0 auto; padding: 3rem;">
+                <form id="slibfRegistrationForm">
+                    <!-- First: Personal Information -->
+                    <div style="margin-bottom: 2.5rem;">
+                        <h4
+                            style="color: var(--primary-color); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
+                            First: Personal Information</h4>
+                        <div class="form-grid-2">
+                            <div style="grid-column: 1 / -1;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Full Name
+                                    (English) *</label>
+                                <input type="text" id="reg-name" required
+                                    style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Nationality
+                                    *</label>
+                                <input type="text" id="reg-nationality" required
+                                    style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Country
+                                    *</label>
+                                <input type="text" id="reg-country" required
+                                    style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;">
+                            </div>
+                            <div style="grid-column: 1 / -1;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Address
+                                    *</label>
+                                <input type="text" id="reg-address" required
+                                    style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second: Contact Information -->
+                    <div style="margin-bottom: 2.5rem;">
+                        <h4
+                            style="color: var(--primary-color); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
+                            Second: Contact Information</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email Address
+                                    *</label>
+                                <input type="email" id="reg-email" required
+                                    style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Mobile Number
+                                    *</label>
+                                <input type="tel" id="reg-phone" required
+                                    style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Third: Academic & Professional Information -->
+                    <div style="margin-bottom: 2.5rem;">
+                        <h4
+                            style="color: var(--primary-color); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
+                            Third: Academic & Professional Information</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div style="grid-column: 1 / -1;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Academic
+                                    Qualification *</label>
+                                <input type="text" id="reg-academic" required
+                                    style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;">
+                            </div>
+                            <div style="grid-column: 1 / -1;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Organization /
+                                    Employer *</label>
+                                <input type="text" id="reg-org" required
+                                    style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Job Title /
+                                    Function *</label>
+                                <input type="text" id="reg-job" required
+                                    style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Years of
+                                    Experience *</label>
+                                <input type="number" id="reg-exp" required min="0"
+                                    style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fourth: Professional Programme Selection -->
+                    <div style="margin-bottom: 2.5rem;">
+                        <h4
+                            style="color: var(--primary-color); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
+                            Fourth: Professional Programme Selection</h4>
+                        <div style="grid-column: 1 / -1;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Select Program
+                                *</label>
+                            <select id="reg-program" required
+                                style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; background-color: #fff;">
+                                <option value="">-- Choose a Program --</option>
+                                <option value="Certified Islamic Banking Expert (CIBE)">Certified Islamic Banking Expert
+                                    (CIBE)</option>
+                                <option value="Certified Islamic Insurance Expert (CIIE)">Certified Islamic Insurance
+                                    Expert (CIIE)</option>
+                                <option value="Certified Public Finance Expert (CPFE)">Certified Public Finance Expert
+                                    (CPFE)</option>
+                                <option value="Certified Islamic Banker (CIB)">Certified Islamic Banker (CIB)</option>
+                                <option value="Certified Islamic Bank Manager (CIBM)">Certified Islamic Bank Manager
+                                    (CIBM)</option>
+                                <option value="Certified Islamic Specialist in Capital Markets">Certified Islamic
+                                    Specialist in Capital Markets</option>
+                                <option value="Certified Islamic Specialist in Trade Finance">Certified Islamic
+                                    Specialist in Trade Finance</option>
+                                <option value="Certified Islamic Specialist in Takaful">Certified Islamic Specialist in
+                                    Takaful</option>
+                                <option value="Certified Islamic Specialist in Accounting">Certified Islamic Specialist
+                                    in Accounting</option>
+                                <option value="Certified Islamic Specialist in Governance and Compliance">Certified
+                                    Islamic Specialist in Governance and Compliance</option>
+                                <option value="Certified Islamic Specialist in Risk Management">Certified Islamic
+                                    Specialist in Risk Management</option>
+                                <option value="Certified Islamic Specialist in Advanced Sharia Auditing">Certified
+                                    Islamic Specialist in Advanced Sharia Auditing</option>
+                                <option value="Certified Islamic Specialist in Product Development">Certified Islamic
+                                    Specialist in Product Development</option>
+                                <option value="Certified Specialist in Islamic Sustainability Management">Certified
+                                    Specialist in Islamic Sustainability Management</option>
+                                <option value="Certificate of Proficiency in Financial Accounting Standards (CPFAS)">
+                                    Certificate of Proficiency in Financial Accounting Standards (CPFAS)</option>
+                                <option value="Certificate of Proficiency in Shari'ah Standards (CPSS)">Certificate of
+                                    Proficiency in Shari'ah Standards (CPSS)</option>
+                                <option value="Certificate of Proficiency in Audit, Assurance, Governance & Ethics">
+                                    Certificate of Proficiency in Audit, Assurance, Governance & Ethics</option>
+                                <option value="Professional Advanced Diploma in Islamic Finance">Professional Advanced
+                                    Diploma in Islamic Finance</option>
+                                <option value="Professional Diploma in Accounting">Professional Diploma in Accounting
+                                </option>
+                                <option value="Professional Diploma in Risk Management">Professional Diploma in Risk
+                                    Management</option>
+                                <option value="Professional Diploma in Shari'ah Auditing">Professional Diploma in
+                                    Shari'ah Auditing</option>
+                                <option value="Professional Diploma in Takaful Insurance">Professional Diploma in
+                                    Takaful Insurance</option>
+                                <option value="Executive Professional Master in Islamic Finance">Executive Professional
+                                    Master in Islamic Finance</option>
+                                <option value="Certified Shari'ah Auditor and Adviser (CSAA)">Certified Shari'ah Auditor
+                                    and Adviser (CSAA)</option>
+                                <option value="Certified Islamic Professional Accountant (CIPA)">Certified Islamic
+                                    Professional Accountant (CIPA)</option>
+                                <option value="Certified Shari'ah Expert (CSE)">Certified Shari'ah Expert (CSE)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Fifth: Declaration -->
+                    <div style="margin-bottom: 2.5rem;">
+                        <h4
+                            style="color: var(--primary-color); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-color);">
+                            Fifth: Declaration</h4>
+                        <div
+                            style="background: var(--accent-color); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                            <label style="display: flex; gap: 1rem; align-items: flex-start; cursor: pointer;">
+                                <input type="checkbox" required style="margin-top: 5px; transform: scale(1.2);">
+                                <span style="font-size: 0.95rem; line-height: 1.5;">I hereby confirm that all the
+                                    information provided in this form is accurate and correct to the best of my
+                                    knowledge.</span>
+                            </label>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Applicant's
+                                    Signature (Type Full Name) *</label>
+                                <input type="text" id="reg-signature" required
+                                    style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Registration
+                                    Date *</label>
+                                <input type="date" id="reg-date" required readonly
+                                    style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; background-color: #f5f5f5;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"
+                        style="width: 100%; padding: 1.2rem; font-size: 1.1rem; text-transform: uppercase;">Submit
+                        Application</button>
+                    <div class="form-messages" style="margin-top: 1rem; text-align: center;"></div>
+                </form>
+>>>>>>> c8a82561c6900bb15a3bd03493e485743aee2170
             </div>
         </div>
     </section>

@@ -23,12 +23,14 @@
     <div class="top-bar">
         <div class="container top-bar-container">
             <div class="top-bar-info">
-                <span><i class="fas fa-phone-alt"></i> +252 63 XXXXXXX</span>
+                <span><i class="fas fa-phone-alt"></i> +252 63 8474440</span>
                 <span><i class="fas fa-envelope"></i> info@slibf.edu</span>
-                <span><i class="fas fa-clock"></i> Sat - Thu: 8:00 AM - 4:00 PM</span>
+
             </div>
             <div class="top-bar-social">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/share/182cvNQaNG/?mibextid=wwXIfr" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>
@@ -39,7 +41,10 @@
     <!-- Navigation -->
     <nav>
         <div class="container nav-container">
-            <a href="index.html" class="logo">SLIBF</a>
+            <a href="index.html" class="logo">
+                <img src="images/logo institute.jpeg" alt="SLIBF Logo">
+                SLIBF
+            </a>
 
             <div class="hamburger">
                 <span></span>
@@ -92,8 +97,9 @@
                     <a href="programs.html" class="btn-pulse">
                         Explore Programs <i class="fas fa-arrow-right" style="margin-left:0.5rem"></i>
                     </a>
-                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn-outline-play"
-                        title="Watch Campus Tour">
+                    <a href="#video-section"
+                        onclick="var vp = document.getElementById('videoPlayer'); if(!vp.querySelector('video')) vp.click();"
+                        class="btn-outline-play" title="Watch Campus Tour">
                         <div class="play-icon"><i class="fas fa-play"></i></div>
                         Campus Tour
                     </a>
@@ -104,8 +110,8 @@
                 <div class="circle-bg"></div>
                 <!-- Main floating graphic using Unsplash finance photo -->
                 <div class="hero-img-box">
-                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800"
-                        alt="Finance Students Collaborative">
+                    <img src="images/event.jpg">
+                    alt="Finance Students Collaborative">
                     <div class="hero-img-overlay"></div>
                 </div>
 
@@ -115,8 +121,8 @@
                         <i class="fas fa-user-graduate"></i>
                     </div>
                     <div class="stat-box">
-                        <h4>1,200+</h4>
-                        <p>Successful Alumni</p>
+                        <h4>100+</h4>
+                        <p>Successful </p>
                     </div>
                 </div>
 
@@ -170,7 +176,7 @@
     </section>
 
     <!-- Video Section -->
-    <section class="video-section">
+    <section class="video-section" id="video-section">
         <div class="container">
             <div class="video-wrapper">
                 <div class="video-text reveal">
@@ -183,16 +189,16 @@
                             <p>Programs</p>
                         </div>
                         <div class="video-stat">
-                            <h3>5K+</h3>
+                            <h3>100+</h3>
                             <p>Graduates</p>
                         </div>
                         <div class="video-stat">
-                            <h3>15+</h3>
+                            <h3>2+</h3>
                             <p>Years</p>
                         </div>
                     </div>
                 </div>
-                <div class="video-container reveal" id="videoPlayer" onclick="playVideo(this)">
+                <div class="video-container reveal" id="videoPlayer" onmouseenter="playVideo(this)">
                     <img src="images/graduates.jpg" alt="SLIBF Campus Tour" class="video-thumbnail">
                     <div class="video-overlay">
                         <div class="play-btn-ring"></div>
@@ -228,7 +234,7 @@
                         <h3>Professional Certifications</h3>
                         <p>International standard certifications from global bodies like AAOIFI and CIBAFI.</p>
                         <br>
-                        <a href="#" class="btn btn-secondary">Learn More</a>
+                        <a href="programs.html" class="btn btn-secondary">Learn More</a>
                     </div>
                 </div>
                 <div class="card reveal">
@@ -238,7 +244,7 @@
                         <h3>Corporate Training</h3>
                         <p>Customized training solutions for financial institutions and government agencies.</p>
                         <br>
-                        <a href="#" class="btn btn-secondary">Learn More</a>
+                        <a href="programs.html" class="btn btn-secondary">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -290,15 +296,15 @@
                     <h2 class="count">0</h2>
                     <p>Academic Programs</p>
                 </div>
-                <div class="stat-card reveal" data-target="5000">
+                <div class="stat-card reveal" data-target="100">
                     <h2 class="count">0</h2>
                     <p>Total Graduates</p>
                 </div>
-                <div class="stat-card reveal" data-target="15">
+                <div class="stat-card reveal" data-target="2">
                     <h2 class="count">0</h2>
                     <p>Years of Excellence</p>
                 </div>
-                <div class="stat-card reveal" data-target="12">
+                <div class="stat-card reveal" data-target="4">
                     <h2 class="count">0</h2>
                     <p>Global Partnerships</p>
                 </div>
@@ -313,11 +319,54 @@
                 <h2>News &amp; Recent Events</h2>
                 <span></span>
             </div>
+<<<<<<< HEAD
             <div class="news-grid" id="home-news-grid">
                 <!-- Dynamically filled by script below -->
             </div>
             <div style="text-align:center; margin-top:2.5rem;">
                 <a href="news.html" class="btn btn-primary">View All News &amp; Events →</a>
+=======
+            <div class="news-grid">
+                <article class="news-card reveal">
+                    <img src="images/faculty.jpg" class="news-img" alt="Graduation Event">
+                    <div class="news-content">
+                        <span class="news-date">Dec 18, 2025</span>
+                        <h3>Celebrating our first batch of Islamic Finance Graduates</h3>
+                        <p>A historic milestone as SLIBF graduates its first cohort of professional master students.</p>
+                        <br>
+                        <a href="news.html"
+                            style="color: var(--primary-color); font-weight: 700; text-decoration: none;">Read More
+                            →</a>
+                    </div>
+                </article>
+                <article class="news-card reveal">
+                    <img src="images/internship pic.jpeg" class="news-img" alt="Conference">
+                    <div class="news-content">
+                        <span class="news-date">Oct 08, 2025</span>
+                        <h3>Internship Program For Profesional Diploma In Banking and Finance Classes </h3>
+                        <p>"The Somaliland Institute of Banking & Finance (SLIBF) officially marked the conclusion of
+                            its Guest Lecture Series, a key component of the Internship Program for Professional Diploma
+                            in Banking and Finance students. Held between Sept 24 and Oct 8, 2025, the program bridged
+                            the gap between academic theory and industry practice.</p>
+                        <br>
+                        <a href="news.html"
+                            style="color: var(--primary-color); font-weight: 700; text-decoration: none;">Read More
+                            →</a>
+                    </div>
+                </article>
+                <article class="news-card reveal">
+                    <img src="images/hero_bg.jpg" class="news-img" alt="Partnership">
+                    <div class="news-content">
+                        <span class="news-date">Jan 28, 2026</span>
+                        <h3>New Partnership with BIBF for Professional Training</h3>
+                        <p>Expanding our reach through strategic international academic alliances.</p>
+                        <br>
+                        <a href="news.html"
+                            style="color: var(--primary-color); font-weight: 700; text-decoration: none;">Read More
+                            →</a>
+                    </div>
+                </article>
+>>>>>>> c8a82561c6900bb15a3bd03493e485743aee2170
             </div>
         </div>
     </section>
@@ -329,7 +378,7 @@
                 <div class="partner-logo">AAOIFI</div>
                 <div class="partner-logo">CIBAFI</div>
                 <div class="partner-logo">BIBF</div>
-                <div class="partner-logo">IBA-Karachi</div>
+                <!-- <div class="partner-logo">IBA-Karachi</div> -->
             </div>
         </div>
     </section>

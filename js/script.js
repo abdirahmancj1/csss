@@ -142,15 +142,106 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Video Player — Replace thumbnail with YouTube iframe
+// Video Player — Play on hover
 function playVideo(container) {
-    // Replace with your actual YouTube video ID
-    const youtubeVideoId = 'dQw4w9WgXcQ';
-    container.innerHTML = `
-        <iframe 
-            src="https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0&modestbranding=1"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    `;
+    if (!container.querySelector('video')) {
+        container.innerHTML = `
+            <video 
+                src="images/video SLIBF.mp4" 
+                muted
+                controls
+                style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+            </video>
+        `;
+    }
+
+    const video = container.querySelector('video');
+
+    // Play on hover
+    container.addEventListener('mouseenter', () => {
+        video.play();
+        container.querySelector('.video-overlay').style.opacity = '0'; // Hide overlay
+    });
+
+    // Pause when mouse leaves
+    container.addEventListener('mouseleave', () => {
+        video.pause();
+        container.querySelector('.video-overlay').style.opacity = '1'; // Show overlay
+    });
+}
+
+// Registration Form Logic for Programs Page
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Auto-fill Date
+    const regDateInput = document.getElementById('reg-date');
+    if (regDateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        regDateInput.value = today;
+    }
+
+    // 2. Program Search Filter
+    const programSearch = document.getElementById('programSearch');
+    const programRows = document.querySelectorAll('.program-table tbody tr');
+
+    if (programSearch && programRows.length > 0) {
+        programSearch.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            programRows.forEach(row => {
+                const textInfo = row.innerText.toLowerCase();
+                if (textInfo.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    // 3. Form Submission (Demo)
+    const slibfForm = document.getElementById('slibfRegistrationForm');
+    if (slibfForm) {
+        slibfForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = slibfForm.querySelector('button[type="submit"]');
+            const messages = slibfForm.querySelector('.form-messages');
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = 'Submit Application';
+                btn.disabled = false;
+                slibfForm.reset();
+                if (regDateInput) regDateInput.value = new Date().toISOString().split('T')[0];
+                messages.innerHTML = '<div style="color: green; font-weight: bold; padding: 1rem; border: 1px solid green; background: #edfaed; border-radius: 4px;">Thank you! Your application has been submitted successfully. Our admissions team will contact you shortly.</div>';
+            }, 1500);
+        });
+    }
+});
+
+// "Apply Now" Button Logic
+function applyForProgram(programName) {
+    const regProgramSelect = document.getElementById('reg-program');
+    const formSection = document.getElementById('registration-form-section');
+
+    if (regProgramSelect && formSection) {
+        // Scroll to form smoothly
+        formSection.scrollIntoView({ behavior: 'smooth' });
+
+        // Select the program
+        regProgramSelect.value = programName;
+
+        // Brief visual highlight to show selection changed
+        setTimeout(() => {
+            regProgramSelect.style.transition = 'box-shadow 0.3s ease';
+            regProgramSelect.style.boxShadow = '0 0 0 4px rgba(11, 110, 79, 0.3)';
+
+            setTimeout(() => {
+                regProgramSelect.style.boxShadow = 'none';
+            }, 1500);
+        }, 500); // give time to scroll
+    } else {
+        // If not on the programs page (e.g. they hit apply on index.html)
+        window.location.href = 'programs.html#registration-form-section';
+    }
 }
